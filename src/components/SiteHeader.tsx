@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
 
 const links = [
@@ -21,69 +21,50 @@ export function SiteHeader() {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <motion.header
-      initial={{ y: -32, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/85 backdrop-blur-xl border-b border-border shadow-[0_1px_0_0_rgba(0,0,0,0.02)]"
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20">
-        <Link to="/" className="flex flex-col group">
-          <img
-            src={logo}
-            alt="Emulus Consulting"
-            className="h-9 w-auto transition-transform duration-500 group-hover:scale-105"
-          />
-          <span className="kicker mt-1 hidden sm:block">Data-Backed Insights. AI-Driven Impact.</span>
+    <header className={`hdr${scrolled ? " scrolled" : ""}`}>
+      <div className="wrap hdr-inner">
+        <Link to="/" aria-label="Emulus home">
+          <img src={logo} alt="Emulus Consulting" style={{ height: 26 }} />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-0.5" aria-label="Primary">
           {links.map((l) => (
             <NavLink
               key={l.to}
               to={l.to}
               end={l.end}
               className={({ isActive }) =>
-                `px-4 py-2 text-sm font-medium transition-colors relative group ${
-                  isActive ? "text-orange" : "text-navy/80 hover:text-orange"
+                `relative px-3.5 py-2 text-[13.5px] font-medium rounded-full transition-all duration-200 ${
+                  isActive
+                    ? "text-[#131931] after:absolute after:left-3.5 after:right-3.5 after:bottom-0.5 after:h-0.5 after:rounded-sm after:bg-gradient-to-r after:from-[#e54727] after:to-[#ff6a3d]"
+                    : "text-[#2a3147]/80 hover:text-[#131931] hover:bg-[rgba(19,25,49,0.04)]"
                 }`
               }
             >
-              {({ isActive }) => (
-                <>
-                  {l.label}
-                  <span
-                    className={`absolute left-4 right-4 -bottom-0.5 h-[2px] bg-orange origin-left transition-transform duration-300 ${
-                      isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
-                    }`}
-                  />
-                </>
-              )}
+              {l.label}
             </NavLink>
           ))}
-          <Link
-            to="/contact"
-            className="ml-3 inline-flex items-center justify-center rounded-full bg-orange px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all relative overflow-hidden btn-glow"
-          >
-            Book a call
-          </Link>
         </nav>
 
+        <div className="hidden lg:flex items-center gap-2.5">
+          <Link to="/contact" className="btn btn-ghost btn-sm">Sign in</Link>
+          <Link to="/contact" className="btn btn-primary btn-sm">
+            Book a call
+            <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
+          </Link>
+        </div>
+
         <button
-          className="lg:hidden p-2 text-navy"
+          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-full border border-[rgba(19,25,49,0.12)] text-[#131931]"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
         >
-          {open ? <X /> : <Menu />}
+          {open ? <X size={18} /> : <Menu size={18} />}
         </button>
       </div>
 
@@ -94,7 +75,7 @@ export function SiteHeader() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-background border-t border-border overflow-hidden"
+            className="lg:hidden bg-white border-t border-[rgba(19,25,49,0.08)] overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
               {links.map((l) => (
@@ -104,8 +85,8 @@ export function SiteHeader() {
                   end={l.end}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `py-3 font-medium border-b border-border/60 ${
-                      isActive ? "text-orange" : "text-navy"
+                    `py-3 font-medium border-b border-[rgba(19,25,49,0.08)] text-sm ${
+                      isActive ? "text-[#e54727]" : "text-[#131931]"
                     }`
                   }
                 >
@@ -115,7 +96,7 @@ export function SiteHeader() {
               <Link
                 to="/contact"
                 onClick={() => setOpen(false)}
-                className="mt-3 inline-flex justify-center rounded-full bg-orange px-5 py-3 text-sm font-semibold text-white"
+                className="mt-3 btn btn-accent w-full justify-center"
               >
                 Book a discovery call
               </Link>
@@ -123,6 +104,6 @@ export function SiteHeader() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 }
