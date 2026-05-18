@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { PageShell, PageHero } from "@/components/PageShell";
-import { Reveal } from "@/components/Reveal";
-import { Briefcase, Plug, GraduationCap, ArrowRight } from "lucide-react";
+import { Plug, Briefcase, GraduationCap, ArrowRight } from "lucide-react";
 import { useSEO } from "@/lib/useSEO";
+
+const reasons = [
+  { icon: Plug, title: "Embed our experts", body: "Senior individuals or full pods aligned to your stack and rituals." },
+  { icon: Briefcase, title: "Flexible engagements", body: "Time-boxed sprints, multi-quarter retainers, or outcomes-based scopes." },
+  { icon: GraduationCap, title: "Knowledge transfer", body: "We hand-off cleanly with documentation, playbooks and training built-in." },
+];
+
+const roles = [
+  { title: "Senior Data Scientist", type: "Full-time · Remote-first", tags: ["Python", "ML", "Statistics"] },
+  { title: "Gen AI Engineer", type: "Contract / Staff Aug", tags: ["LLMs", "RAG", "Python"] },
+  { title: "Data Analyst — Impact", type: "Full-time · India", tags: ["SQL", "BI", "Excel"] },
+];
 
 export default function Careers() {
   useSEO({
@@ -17,50 +27,100 @@ export default function Careers() {
         title="Plug in expert talent. Or join a team that does."
         subtitle="Our staff augmentation model lets you scale capability without overhead — embedded data scientists, analysts, and AI engineers, ready to ship."
       />
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 grid md:grid-cols-3 gap-6">
-        {[
-          { icon: Plug, title: "Embed our experts", body: "Senior individuals or full pods aligned to your stack and rituals." },
-          { icon: Briefcase, title: "Flexible engagements", body: "Time-boxed sprints, multi-quarter retainers, or outcomes-based scopes." },
-          { icon: GraduationCap, title: "Knowledge transfer", body: "We hand-off cleanly with documentation, playbooks and training built-in." },
-        ].map((c, i) => (
-          <Reveal key={c.title} delay={i * 0.1}>
-            <motion.div
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.4 }}
-              className="bg-card rounded-3xl p-8 border border-border h-full hover:border-orange/40 hover:shadow-xl hover:shadow-navy/5 transition-all duration-500 group"
-            >
-              <div className="w-12 h-12 rounded-2xl bg-navy text-orange flex items-center justify-center group-hover:bg-orange group-hover:text-white group-hover:rotate-6 transition-all duration-500">
-                <c.icon className="w-5 h-5" />
+
+      {/* Staff aug */}
+      <section className="block">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow"><span className="dot" /> Staff augmentation</p>
+              <h2>Your team, extended with senior practitioners.</h2>
+            </div>
+            <p>
+              We embed skilled data scientists, analysts, and AI engineers directly into your team —
+              aligned to your stack, culture, and rituals from day one.
+            </p>
+          </div>
+          <div className="tri">
+            {reasons.map((r) => (
+              <div key={r.title} className="tri-card">
+                <div className="tri-ico">
+                  <r.icon size={22} strokeWidth={1.8} />
+                </div>
+                <h3>{r.title}</h3>
+                <p>{r.body}</p>
               </div>
-              <h3 className="mt-6 text-xl">{c.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{c.body}</p>
-            </motion.div>
-          </Reveal>
-        ))}
+            ))}
+          </div>
+        </div>
       </section>
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24">
-        <Reveal>
-          <div className="gradient-navy rounded-[2rem] p-12 lg:p-16 text-white text-center relative overflow-hidden">
-            <div className="absolute inset-0 grid-bg opacity-40" />
-            <motion.div
-              className="absolute -top-20 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-3xl opacity-40"
-              style={{ background: "radial-gradient(circle, #E54727 0%, transparent 60%)" }}
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 8, repeat: Infinity }}
-            />
-            <div className="relative">
-              <h2 className="text-3xl md:text-4xl text-white max-w-2xl mx-auto">
-                Want to join Emulus? We're always meeting talented people.
-              </h2>
-              <Link
-                to="/contact"
-                className="mt-8 inline-flex items-center gap-2 rounded-full bg-orange px-7 py-4 text-sm font-semibold text-white hover:-translate-y-0.5 transition-all btn-glow"
+
+      {/* Open roles */}
+      <section className="block" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow"><span className="dot" /> Open roles</p>
+              <h2>Join a team building the<br />next generation of data systems.</h2>
+            </div>
+            <p>
+              We're always looking for talented people. If you don't see a role that fits, reach out
+              anyway — we hire for potential and craft.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {roles.map((role, i) => (
+              <div
+                key={role.title}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "28px 0",
+                  borderTop: "1px solid rgba(19,25,49,0.08)",
+                  borderBottom: i === roles.length - 1 ? "1px solid rgba(19,25,49,0.08)" : undefined,
+                  gap: 16,
+                  flexWrap: "wrap",
+                }}
               >
-                Get in touch <ArrowRight className="w-4 h-4" />
+                <div>
+                  <h3 style={{ fontSize: 22, fontWeight: 600, margin: 0 }}>{role.title}</h3>
+                  <p style={{ marginTop: 4, fontFamily: "var(--font-mono)", fontSize: 11, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--c-ink-2)" }}>
+                    {role.type}
+                  </p>
+                </div>
+                <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  {role.tags.map((t) => (
+                    <span key={t} style={{ fontFamily: "var(--font-mono)", fontSize: 10.5, letterSpacing: "0.08em", textTransform: "uppercase", color: "rgba(255,255,255,0.72)", padding: "4px 8px", borderRadius: 6, background: "rgba(19,25,49,0.06)", border: "1px solid rgba(19,25,49,0.10)" }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <Link to="/contact" className="btn btn-ghost btn-sm">Apply</Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ paddingBottom: 140 }}>
+        <div className="wrap">
+          <div className="cta-card">
+            <p className="eyebrow on-dark" style={{ position: "relative" }}><span className="dot" /> Join us</p>
+            <h2 style={{ marginTop: 14 }}>
+              Want to join Emulus? We're always meeting <span className="accent">talented people.</span>
+            </h2>
+            <p className="cta-sub">
+              Send us your CV and what you're excited about building next.
+            </p>
+            <div className="cta-buttons">
+              <Link to="/contact" className="btn btn-accent">
+                Get in touch <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
               </Link>
             </div>
           </div>
-        </Reveal>
+        </div>
       </section>
     </PageShell>
   );

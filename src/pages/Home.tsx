@@ -1,340 +1,539 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  Brain, Search, Database, Code2, Users, Heart, ArrowRight,
-  Sparkles, LineChart, Globe2,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Brain, Search, Database, Code2, Users, Heart } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
-import { HeroBackdrop } from "@/components/HeroBackdrop";
-import { Reveal } from "@/components/Reveal";
 import { useSEO } from "@/lib/useSEO";
 
-const services = [
-  { icon: Brain, title: "Generative AI Consulting", body: "AI-driven workflows, agentic systems, and operationalized analytics built for production." },
-  { icon: Search, title: "Data-Backed Market Research", body: "Primary surveys, interviews and FGDs paired with deep secondary and competitive intelligence." },
-  { icon: Database, title: "Data Engineering & Analytics", body: "Pipelines, warehousing, BI dashboards, and visual storytelling that drive action." },
-  { icon: Code2, title: "Software Services & Products", body: "Full-stack product lifecycle, agile delivery, and resilient deployment." },
-  { icon: Users, title: "Staff Augmentation", body: "Embed senior data scientists, analysts, and AI engineers directly into your team." },
-  { icon: Heart, title: "Social Enterprises & NGOs", body: "Impact measurement, MIS, and analytics platforms for purpose-led organizations." },
+/* ── Animated SVG chart panel ── */
+const logs = [
+  "ingest::pipeline.v3 → batch 4,812 rows",
+  "model::risk-score → inference 12ms",
+  "genai::summary → 24 tokens drafted",
+  "segment::cohort_A → drift 0.04σ",
+  "eval::accuracy → 98.2% holdout",
+  "agent::plan → 3 actions queued",
+  "kpi::churn → -3.4% wow",
+  "feature::v_engagement → recomputed",
 ];
 
-const flow = [
-  { step: "01", label: "Raw Data", desc: "Surveys, sensors, systems, field teams." },
-  { step: "02", label: "Insights", desc: "Cleaned, modeled, contextualized." },
-  { step: "03", label: "AI-Driven Decisions", desc: "Operationalized through GenAI." },
+function HeroDataPanel() {
+  const lineRef = useRef<SVGPathElement>(null);
+  const areaRef = useRef<SVGPathElement>(null);
+  const dotRef = useRef<SVGCircleElement>(null);
+  const phase = useRef(0);
+  const [logIdx, setLogIdx] = useState(0);
+  const [kpis, setKpis] = useState(["0", "0%", "0"]);
+
+  useEffect(() => {
+    const W = 600, H = 260, pts = 36;
+    const render = () => {
+      let d = "";
+      let lx = 0, ly = 0;
+      for (let i = 0; i < pts; i++) {
+        const x = (i / (pts - 1)) * W;
+        const t = i / (pts - 1);
+        const y =
+          90 - t * 60 +
+          Math.sin(i * 0.5 + phase.current) * 14 +
+          Math.sin(i * 0.17 + phase.current * 0.7) * 18 +
+          Math.cos(i * 0.31 + phase.current * 1.3) * 8 +
+          (1 - t) * 14;
+        d += (i === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1) + " ";
+        lx = x; ly = y;
+      }
+      lineRef.current?.setAttribute("d", d);
+      areaRef.current?.setAttribute("d", d + `L${W} ${H} L0 ${H}Z`);
+      dotRef.current?.setAttribute("cx", lx.toFixed(1));
+      dotRef.current?.setAttribute("cy", ly.toFixed(1));
+    };
+    render();
+    const id = setInterval(() => { phase.current += 0.06; render(); }, 60);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setLogIdx((i) => (i + 1) % logs.length), 2200);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const targets = [12834, 98.2, 47];
+    const dur = 1800;
+    const t0 = performance.now();
+    const tick = () => {
+      const k = Math.min(1, (performance.now() - t0) / dur);
+      const e = 1 - Math.pow(1 - k, 3);
+      setKpis([
+        (targets[0] * e | 0).toLocaleString(),
+        (targets[1] * e).toFixed(1) + "%",
+        (targets[2] * e | 0).toString(),
+      ]);
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, []);
+
+  return (
+    <div className="hero-vis">
+      <div className="panel-head">
+        <span className="panel-title">
+          <span className="dots-os"><i /><i /><i /></span>
+          <span><b>emulus.</b>insights · production</span>
+        </span>
+        <span className="panel-title" style={{ opacity: 0.7, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "50%" }}>
+          {logs[logIdx]}
+        </span>
+      </div>
+
+      <div className="chart">
+        <div className="chart-grid" />
+        <div className="chart-labels">
+          <span className="live-pill"><i />Live</span>
+          <span>Decisions / hour · <b>last 24h</b></span>
+        </div>
+        <svg viewBox="0 0 600 260" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
+          <defs>
+            <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0%" stopColor="#ff8d5e" />
+              <stop offset="100%" stopColor="#e54727" />
+            </linearGradient>
+            <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="rgba(229,71,39,0.35)" />
+              <stop offset="100%" stopColor="rgba(229,71,39,0)" />
+            </linearGradient>
+          </defs>
+          <path ref={areaRef} fill="url(#areaGrad)" />
+          <path ref={lineRef} stroke="url(#lineGrad)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          <circle ref={dotRef} r="5" fill="#e54727">
+            <animate attributeName="r" values="5;9;5" dur="1.6s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite" />
+          </circle>
+        </svg>
+      </div>
+
+      <div className="kpis">
+        {[
+          { lab: "Records / sec", val: kpis[0], delta: "+18.4% wow" },
+          { lab: "Model accuracy", val: kpis[1], delta: "+1.2 pts" },
+          { lab: "Agents online", val: kpis[2], delta: "+6 today" },
+        ].map((k) => (
+          <div key={k.lab} className="kpi">
+            <div className="lab">{k.lab}</div>
+            <div className="val">{k.val}</div>
+            <div className="delta">{k.delta}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Animated stat counter ── */
+function StatCounter({ value, suffix = "", decimals = 0, label }: { value: number; suffix?: string; decimals?: number; label: string }) {
+  const [n, setN] = useState(0);
+  const fired = useRef(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !fired.current) {
+        fired.current = true;
+        io.disconnect();
+        const dur = 1500, t0 = performance.now();
+        const tick = () => {
+          const k = Math.min(1, (performance.now() - t0) / dur);
+          setN(value * (1 - Math.pow(1 - k, 3)));
+          if (k < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      }
+    }, { threshold: 0.4 });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, [value]);
+
+  return (
+    <div ref={ref} className="stat-cell">
+      <div className="stat-num">
+        {n.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
+        {suffix && <span className="suffix">{suffix}</span>}
+      </div>
+      <div className="stat-lab">{label}</div>
+    </div>
+  );
+}
+
+/* ── Animated bar chart ── */
+function MiniChart({ heights, variant }: { heights: number[]; variant: "dark" | "light" }) {
+  const [started, setStarted] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) { setStarted(true); io.disconnect(); }
+    }, { threshold: 0.4 });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div ref={ref} className="mini-chart">
+      <div className="bars">
+        {heights.map((h, i) => (
+          <i key={i} style={{ height: started ? `${h}%` : "0%", transitionDelay: `${i * 90}ms` }} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ── Cap card with mouse-glow ── */
+const capabilities = [
+  {
+    icon: Brain,
+    title: "Generative AI Consulting",
+    body: "Agentic workflows, RAG systems, and operationalized analytics built for production-grade reliability.",
+    href: "/services",
+  },
+  {
+    icon: Search,
+    title: "Market Research & Insights",
+    body: "Primary surveys, interviews, FGDs and competitive intelligence with statistical rigor and human depth.",
+    href: "/services",
+  },
+  {
+    icon: Database,
+    title: "Data Engineering & Analytics",
+    body: "Pipelines, warehouses, BI dashboards, and visual storytelling that drives action — not slide decks.",
+    href: "/services",
+  },
+  {
+    icon: Code2,
+    title: "Software Services & Products",
+    body: "Full-stack product lifecycle: discovery, agile delivery, resilient deployment, and post-launch ops.",
+    href: "/services",
+  },
+  {
+    icon: Users,
+    title: "Staff Augmentation",
+    body: "Embed senior data scientists, ML engineers and analysts directly into your roadmap.",
+    href: "/careers",
+  },
+  {
+    icon: Heart,
+    title: "Social Enterprises & NGOs",
+    body: "Impact measurement, MIS platforms, and analytics for purpose-led organizations and field teams.",
+    href: "/services",
+  },
 ];
+
+function CapCard({ icon: Icon, title, body, href }: (typeof capabilities)[0]) {
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    e.currentTarget.style.setProperty("--my", (e.clientY - r.top) + "px");
+  };
+  return (
+    <article className="cap" onMouseMove={onMouseMove}>
+      <div className="cap-ico">
+        <Icon size={22} strokeWidth={1.8} />
+      </div>
+      <h3>{title}</h3>
+      <p>{body}</p>
+      <Link to={href} className="cap-link">Learn more →</Link>
+    </article>
+  );
+}
+
+/* ── Hero cursor spotlight ── */
+function HeroSpot() {
+  const spotRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const hero = spotRef.current?.parentElement;
+    if (!hero) return;
+    heroRef.current = hero as HTMLElement;
+    const onMove = (e: MouseEvent) => {
+      const r = hero.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      spotRef.current?.style.setProperty("--sx", x + "%");
+      spotRef.current?.style.setProperty("--sy", y + "%");
+    };
+    hero.addEventListener("mousemove", onMove);
+    return () => hero.removeEventListener("mousemove", onMove);
+  }, []);
+
+  return <div ref={spotRef} className="spot" />;
+}
 
 export default function Home() {
   useSEO({
     title: "Emulus Consulting LLP — Data-Backed Insights. AI-Driven Impact.",
     description:
-      "Empowering businesses and social enterprises with data-driven insights and Generative AI. Research, analytics, software services, and staff augmentation.",
+      "Emulus is a global consulting partner for market research, data engineering, software, and Generative AI — helping enterprises and social-impact teams ship outcomes.",
   });
 
   return (
     <PageShell>
-      {/* HERO */}
-      <section className="relative gradient-navy text-white overflow-hidden">
-        <HeroBackdrop />
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-10 pt-20 pb-32 lg:pt-32 lg:pb-44">
-          <motion.p
-            initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="kicker"
-          >
-            <Sparkles className="inline w-3 h-3 mr-2 -translate-y-px animate-spin-slow" />
-            Data-Backed Insights. AI-Driven Impact.
-          </motion.p>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="mt-6 text-4xl md:text-6xl lg:text-7xl font-bold leading-[1.02] text-white max-w-5xl"
-          >
-            Empowering businesses and social enterprises with{" "}
-            <span className="text-gradient-accent">data-driven insights</span>{" "}
-            and Gen AI.
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.25 }}
-            className="mt-8 max-w-2xl text-lg md:text-xl text-white/75 leading-relaxed"
-          >
-            Emulus Consulting LLP helps organizations across industries and civil-society
-            turn complex data into actionable decisions, powered by{" "}
-            <span className="text-orange font-semibold">advanced analytics, research, and Generative AI</span>.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <Link
-              to="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-orange px-7 py-4 text-sm font-semibold text-white shadow-xl shadow-orange/30 hover:shadow-orange/50 hover:-translate-y-0.5 transition-all btn-glow"
-            >
-              Book a discovery call
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              to="/case-studies"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-4 text-sm font-semibold text-white hover:bg-white/10 transition"
-            >
-              See our case studies
-            </Link>
-          </motion.div>
-
-          {/* Benefit bullets */}
-          <motion.ul
-            initial="hidden" animate="show"
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.6 } } }}
-            className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl"
-          >
-            {[
-              "Primary & secondary market research",
-              "Generative AI for insights & automation",
-              "Expert data scientists, on demand",
-              "Trusted by NGOs & social enterprises",
-            ].map((b, i) => (
-              <motion.li
-                key={b}
-                variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}
-                whileHover={{ y: -4, scale: 1.02 }}
-                transition={{ duration: 0.4 }}
-                className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur px-5 py-4 text-sm text-white/85 cursor-default"
-              >
-                <span className="block text-orange font-bold text-xs uppercase tracking-wider mb-1">0{i + 1}</span>
-                {b}
-              </motion.li>
-            ))}
-          </motion.ul>
-        </div>
-      </section>
-
-      {/* WHO WE ARE */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
-        <div className="grid lg:grid-cols-12 gap-12 items-start">
-          <Reveal className="lg:col-span-4">
-            <p className="kicker">Who we are</p>
-            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl leading-tight">
-              A global partner for <span className="shimmer-text">data &amp; AI</span>.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-7 lg:col-start-6">
-            <p className="text-lg leading-relaxed text-ink">
-              Emulus Consulting LLP is a global consulting and technology partner
-              specializing in market research and insights, data technologies,
-              software services, and Generative AI. We work with commercial
-              organizations and social-impact institutions to turn complex data
-              into actionable strategies and measurable impact.
+      {/* ── HERO ── */}
+      <section className="hero" id="top">
+        <HeroSpot />
+        <div className="wrap hero-grid">
+          <div>
+            <p className="eyebrow"><span className="dot" /> Data-backed insights · AI-driven impact</p>
+            <h1>
+              Turn complex data<br />
+              into <span className="accent">decisions</span> that<br />
+              move your business.
+            </h1>
+            <p className="sub">
+              Emulus is a global consulting partner for market research, data engineering,
+              software, and Generative AI — helping enterprises and social-impact teams ship
+              outcomes, not just dashboards.
             </p>
-            <div className="mt-10 grid grid-cols-3 gap-6">
-              {[
-                { n: "4", l: "Countries" },
-                { n: "50+", l: "Engagements" },
-                { n: "100%", l: "Outcome-driven" },
-              ].map((s, i) => (
-                <motion.div
-                  key={s.l}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="border-t-2 border-orange pt-3"
-                >
-                  <div className="text-3xl md:text-4xl font-bold text-orange">{s.n}</div>
-                  <div className="text-xs uppercase font-bold tracking-wider text-muted-foreground mt-1">{s.l}</div>
-                </motion.div>
-              ))}
+            <div className="cta-row">
+              <Link to="/contact" className="btn btn-accent">
+                Book a discovery call
+                <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
+              </Link>
+              <Link to="/case-studies" className="btn btn-ghost">See case studies</Link>
             </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* FLOW */}
-      <section className="bg-mist py-24 lg:py-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <Reveal>
-            <p className="kicker">How we work</p>
-            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl max-w-2xl">
-              From raw data → insights → AI-driven decisions.
-            </h2>
-          </Reveal>
-
-          <div className="mt-16 grid md:grid-cols-3 gap-6 relative">
-            <div className="hidden md:block absolute top-12 left-[12%] right-[12%] h-px bg-gradient-to-r from-transparent via-orange to-transparent" />
-            {flow.map((f, i) => (
-              <Reveal key={f.step} delay={i * 0.12}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative bg-background rounded-3xl p-8 border border-border hover:border-orange/40 hover:shadow-xl hover:shadow-orange/5 transition-all duration-500 group"
-                >
-                  <div className="w-12 h-12 rounded-full bg-orange text-white flex items-center justify-center font-bold relative z-10 shadow-lg shadow-orange/30 group-hover:scale-110 transition-transform">
-                    {f.step}
-                  </div>
-                  <h3 className="mt-6 text-xl">{f.label}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
-                  <motion.div
-                    className="absolute -bottom-px left-8 right-8 h-px bg-orange origin-left"
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.3 + i * 0.15 }}
-                  />
-                </motion.div>
-              </Reveal>
-            ))}
+            <div className="trust">
+              <span className="avatars" aria-hidden="true">
+                <span>RD</span><span>EM</span><span>FA</span><span>SR</span>
+              </span>
+              <span>Trusted by teams in <b style={{ color: "#131931" }}>4 countries</b> across pharma, BFSI &amp; impact.</span>
+            </div>
           </div>
+          <HeroDataPanel />
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <Reveal>
-            <p className="kicker">Our services</p>
-            <h2 className="mt-3 text-3xl md:text-4xl lg:text-5xl max-w-xl">
-              Six capabilities, one outcome: clarity.
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Link to="/services" className="text-orange font-semibold inline-flex items-center gap-2 hover:gap-3 transition-all">
-              All services <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Reveal>
-        </div>
-
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {services.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.06}>
-              <motion.div
-                whileHover={{ y: -6, rotate: -0.4 }}
-                transition={{ duration: 0.4 }}
-                className="group h-full bg-card rounded-3xl p-7 border border-border hover:border-orange/40 hover:shadow-xl hover:shadow-navy/5 transition-all duration-500"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-navy text-orange flex items-center justify-center group-hover:bg-orange group-hover:text-white group-hover:rotate-6 transition-all duration-500">
-                  <s.icon className="w-5 h-5" />
-                </div>
-                <h3 className="mt-6 text-lg">{s.title}</h3>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.body}</p>
-              </motion.div>
-            </Reveal>
+      {/* ── MARQUEE ── */}
+      <div className="marquee-strip" aria-label="Selected clients">
+        <div className="marquee-row">
+          {["Pharma Co", "Global BFSI", "Life Sciences", "Rural Dev NGO", "Education Trust", "FinTech Lab", "MedTech Inc", "Impact Fund", "HealthLine", "Atlas Capital",
+            "Pharma Co", "Global BFSI", "Life Sciences", "Rural Dev NGO", "Education Trust", "FinTech Lab", "MedTech Inc", "Impact Fund", "HealthLine", "Atlas Capital"].map((n, i) => (
+            <span key={i}>{n}</span>
           ))}
         </div>
+      </div>
+
+      {/* ── STATS ── */}
+      <div className="wrap" style={{ paddingTop: 80, paddingBottom: 0 }}>
+        <div className="stats-grid">
+          <StatCounter value={4} label="Countries served" />
+          <StatCounter value={50} suffix="+" label="Engagements delivered" />
+          <StatCounter value={98.2} decimals={1} suffix="%" label="Avg. model accuracy" />
+          <StatCounter value={24} suffix="/7" label="On-call AI engineers" />
+        </div>
+      </div>
+
+      {/* ── CAPABILITIES ── */}
+      <section className="block" id="capabilities">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow"><span className="dot" /> Capabilities</p>
+              <h2>Six capabilities,<br />one outcome: <em style={{ fontStyle: "normal", color: "#e54727" }}>clarity.</em></h2>
+            </div>
+            <p>
+              We combine research rigor with engineering discipline and modern AI — a single
+              team that goes from raw data to working product, end to end.
+            </p>
+          </div>
+          <div className="caps">
+            {capabilities.map((c) => <CapCard key={c.title} {...c} />)}
+          </div>
+        </div>
       </section>
 
-      {/* TWO HALVES */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 pb-24 lg:pb-32">
-        <div className="grid lg:grid-cols-2 gap-6">
-          <Reveal>
-            <div className="gradient-navy rounded-[2rem] p-10 lg:p-12 text-white relative overflow-hidden h-full min-h-[420px]">
-              <div className="absolute inset-0 grid-bg opacity-40" />
-              <motion.div
-                className="absolute -top-16 -right-16 w-72 h-72 rounded-full blur-3xl opacity-50"
-                style={{ background: "radial-gradient(circle, #E54727 0%, transparent 70%)" }}
-                animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0.55, 0.3] }}
-                transition={{ duration: 10, repeat: Infinity }}
-              />
-              <div className="relative">
-                <LineChart className="w-10 h-10 text-orange" />
-                <p className="kicker mt-6">Commercial clients</p>
-                <h3 className="mt-3 text-3xl md:text-4xl text-white max-w-sm">
-                  Pharma, BFSI, life sciences &amp; enterprise.
-                </h3>
-                <p className="mt-5 text-white/70 max-w-md leading-relaxed">
-                  Decision intelligence, growth analytics, and AI products built
-                  with the rigor enterprises expect.
-                </p>
-                <Link
-                  to="/industries"
-                  className="mt-8 inline-flex items-center gap-2 text-orange font-semibold hover:gap-3 transition-all"
-                >
-                  Explore industries <ArrowRight className="w-4 h-4" />
-                </Link>
+      {/* ── PIPELINE / HOW WE WORK ── */}
+      <section className="block pipeline-section" id="solutions">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow on-dark"><span className="dot" /> How we work</p>
+              <h2>From raw data<br />→ insights<br />→ AI-driven decisions.</h2>
+            </div>
+            <p>
+              A three-stage operating model. Every engagement begins with measurable
+              outcomes, and ends with a live system your team owns.
+            </p>
+          </div>
+          <div className="pipeline">
+            <div className="pipe-line-bar" aria-hidden="true" />
+            {[
+              {
+                num: "01", title: "Raw Data",
+                body: "We integrate sources you already have — and the ones you didn't know you needed. Surveys, sensors, systems, field teams.",
+                tags: ["Surveys", "ETL", "Field ops", "APIs"],
+              },
+              {
+                num: "02", title: "Insights",
+                body: "Cleaned, modeled, contextualized. Statistical baselines meet business questions to produce signal — not noise.",
+                tags: ["Modeling", "BI", "Storytelling"],
+              },
+              {
+                num: "03", title: "AI-Driven Decisions",
+                body: "Insights operationalized through GenAI — agents, copilots and automations embedded where the work actually happens.",
+                tags: ["Agents", "RAG", "Automations", "Eval"],
+              },
+            ].map((s) => (
+              <article key={s.num} className="pipe-card">
+                <div className="pipe-num">{s.num}</div>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
+                <div className="pipe-tags">
+                  {s.tags.map((t) => <span key={t}>{t}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── INDUSTRIES SPLIT ── */}
+      <section className="block" id="industries">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow"><span className="dot" /> Industries</p>
+              <h2>Built for enterprises.<br />Honed for impact.</h2>
+            </div>
+            <p>
+              Same toolkit, different velocity. We meet you where you are — whether that's
+              a regulated pharma rollout or a field-team MIS deployed in 12 districts.
+            </p>
+          </div>
+          <div className="split">
+            <article className="split-card dark">
+              <div>
+                <p className="eyebrow on-dark"><span className="dot" /> Commercial clients</p>
+                <h3>Pharma, BFSI, life sciences &amp; enterprise.</h3>
+                <p>Decision intelligence, growth analytics and AI products built with the rigor that regulated industries require.</p>
+                <div className="tag-row">
+                  {["Pharma", "BFSI", "Life sciences", "SaaS"].map((t) => (
+                    <span key={t} className="split-tag">{t}</span>
+                  ))}
+                </div>
+              </div>
+              <MiniChart heights={[40, 55, 38, 68, 62, 80, 70, 92, 78, 88]} variant="dark" />
+            </article>
+            <article className="split-card light">
+              <div>
+                <p className="eyebrow"><span className="dot" /> Social impact</p>
+                <h3>Driving impact you can measure.</h3>
+                <p>Custom MIS, results-monitoring platforms and analytics-driven program evaluation for NGOs and not-for-profits.</p>
+                <div className="tag-row">
+                  {["Education", "Health", "Livelihoods", "Field MIS"].map((t) => (
+                    <span key={t} className="split-tag">{t}</span>
+                  ))}
+                </div>
+              </div>
+              <MiniChart heights={[30, 45, 58, 50, 72, 62, 84, 70, 90, 78]} variant="light" />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* ── SELECTED WORK ── */}
+      <section className="block" id="work" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow"><span className="dot" /> Selected work</p>
+              <h2>Outcomes, not output.</h2>
+            </div>
+            <p>
+              A few of the engagements we're proud of — from BFSI risk models to district-scale
+              impact dashboards.
+            </p>
+          </div>
+          <div className="cases">
+            {[
+              {
+                cover: "case-cover-navy",
+                tag: "Pharma · Decision Intelligence",
+                stat: "3.2×",
+                statLabel: "ROI",
+                title: "Forecasting field-rep effectiveness across 14 markets.",
+                body: "Replaced a spreadsheet-driven planning cycle with a live forecasting engine and embedded LLM summaries.",
+              },
+              {
+                cover: "case-cover-orange",
+                tag: "BFSI · Risk Modeling",
+                stat: "-38%",
+                statLabel: "defaults",
+                title: "Real-time credit-risk scoring on a streaming pipeline.",
+                body: "Cut decisioning latency from 6 hours to 90 seconds with a Spark + feature-store rebuild.",
+              },
+              {
+                cover: "case-cover-teal",
+                tag: "NGO · Impact MIS",
+                stat: "12",
+                statLabel: "districts",
+                title: "An MIS that turned 240 field workers into a real-time program.",
+                body: "Offline-first data collection + a results-monitoring dashboard funders can read at a glance.",
+              },
+            ].map((c) => (
+              <article key={c.title} className="case">
+                <div className={`case-cover ${c.cover}`}>
+                  <div className="case-meta">
+                    <span>{c.tag}</span>
+                    <span>{c.stat} {c.statLabel}</span>
+                  </div>
+                </div>
+                <div className="case-body">
+                  <h3>{c.title}</h3>
+                  <p>{c.body}</p>
+                  <Link to="/case-studies" className="case-read">Read case study →</Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIAL ── */}
+      <section className="block" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <div className="testimonial">
+            <p className="eyebrow"><span className="dot" /> Client voices</p>
+            <blockquote>
+              <span className="quote-mark">&ldquo;</span>Emulus didn't sell us a dashboard — they re-wrote how our commercial team makes decisions. Eight weeks in, we'd pulled an entire planning cycle forward.<span className="quote-mark">&rdquo;</span>
+            </blockquote>
+            <div className="testimonial-meta">
+              <div className="t-ava">NK</div>
+              <div>
+                <div className="t-name">Nikhil Kapoor</div>
+                <div className="t-role">VP Strategy · Global Pharma</div>
               </div>
             </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="bg-card rounded-[2rem] p-10 lg:p-12 relative overflow-hidden h-full min-h-[420px] border border-border">
-              <Heart className="w-10 h-10 text-orange animate-pulse-soft" />
-              <p className="kicker mt-6">Social enterprises &amp; NGOs</p>
-              <h3 className="mt-3 text-3xl md:text-4xl max-w-sm">
-                Driving impact you can measure.
-              </h3>
-              <p className="mt-5 text-ink/80 max-w-md leading-relaxed">
-                Custom MIS, results-monitoring platforms, and analytics-driven
-                program evaluation for NGOs and not-for-profits.
-              </p>
-              <ul className="mt-6 space-y-2 text-sm text-ink/80">
-                <li>· Field-team data collection &amp; dashboards</li>
-                <li>· Impact measurement frameworks</li>
-                <li>· MIS and reporting platforms</li>
-              </ul>
-              <Link
-                to="/case-studies"
-                className="mt-8 inline-flex items-center gap-2 text-orange font-semibold hover:gap-3 transition-all"
-              >
-                Impact stories <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* CLIENTS MARQUEE */}
-      <section className="border-y border-border bg-mist py-12 overflow-hidden">
-        <p className="kicker text-center mb-8">Trusted across industries &amp; geographies</p>
-        <div className="relative flex overflow-hidden">
-          <div className="flex animate-marquee whitespace-nowrap gap-16 px-8">
-            {[...Array(2)].map((_, dup) =>
-              ["Pharma Co.", "Global BFSI", "Life Sciences", "Rural Dev NGO", "Education Trust", "FinTech Lab", "MedTech Inc.", "Impact Fund"].map((n) => (
-                <span key={`${dup}-${n}`} className="text-2xl font-bold text-navy/30 hover:text-orange transition-colors">
-                  {n}
-                </span>
-              ))
-            )}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="max-w-7xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
-        <Reveal>
-          <div className="gradient-navy rounded-[2rem] p-12 lg:p-20 text-center text-white relative overflow-hidden">
-            <div className="absolute inset-0 grid-bg opacity-40" />
-            <motion.div
-              className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-3xl opacity-50"
-              style={{ background: "radial-gradient(circle, #E54727 0%, transparent 60%)" }}
-              animate={{ scale: [1, 1.2, 1], x: [0, -30, 0], y: [0, 20, 0] }}
-              transition={{ duration: 8, repeat: Infinity }}
-            />
-            <motion.div
-              className="absolute -bottom-32 -left-20 w-96 h-96 rounded-full blur-3xl opacity-30"
-              style={{ background: "radial-gradient(circle, #3F8FD9 0%, transparent 60%)" }}
-              animate={{ scale: [1.1, 1, 1.1], x: [0, 40, 0] }}
-              transition={{ duration: 12, repeat: Infinity }}
-            />
-            <div className="relative">
-              <Globe2 className="w-12 h-12 mx-auto text-orange animate-spin-slow" />
-              <h2 className="mt-6 text-3xl md:text-5xl text-white max-w-3xl mx-auto leading-tight">
-                Ready to turn your data into <span className="text-gradient-accent">decisions</span>?
-              </h2>
-              <p className="mt-5 text-white/70 max-w-xl mx-auto">
-                Let's scope a 30-minute discovery call. No slides, no fluff — just
-                your data and what's possible.
-              </p>
-              <Link
-                to="/contact"
-                className="mt-10 inline-flex items-center gap-2 rounded-full bg-orange px-8 py-4 text-sm font-semibold text-white shadow-xl shadow-orange/30 hover:shadow-orange/60 hover:-translate-y-0.5 transition-all btn-glow"
-              >
-                Book a discovery call <ArrowRight className="w-4 h-4" />
+      {/* ── CTA ── */}
+      <section style={{ padding: "80px 0 140px" }} id="contact">
+        <div className="wrap">
+          <div className="cta-card">
+            <p className="eyebrow on-dark" style={{ position: "relative" }}><span className="dot" /> Get in touch</p>
+            <h2 style={{ marginTop: 14 }}>
+              Ready to turn your data into <span className="accent">decisions</span>?
+            </h2>
+            <p className="cta-sub">
+              Scope a 30-minute discovery call. No slides, no fluff — just your data and what's possible with it.
+            </p>
+            <div className="cta-buttons">
+              <Link to="/contact" className="btn btn-accent">
+                Book a discovery call
+                <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
               </Link>
+              <Link to="/contact" className="btn btn-ghost on-dark">Email the team</Link>
             </div>
           </div>
-        </Reveal>
+        </div>
       </section>
     </PageShell>
   );
