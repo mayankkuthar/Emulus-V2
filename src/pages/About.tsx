@@ -24,7 +24,7 @@ export default function About() {
           <div className="section-head">
             <div>
               <p className="eyebrow"><span className="dot" /> {c.visionPurpose.eyebrow}</p>
-              <h2>{c.visionPurpose.heading}</h2>
+              <h2 dangerouslySetInnerHTML={{ __html: c.visionPurpose.heading }} />
             </div>
             <p>{c.visionPurpose.description}</p>
           </div>
@@ -70,7 +70,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="block" style={{ background: "#f6f7fa", paddingTop: 96, paddingBottom: 96 }}>
+      <section className="block" style={{ paddingTop: 96, paddingBottom: 96 }}>
         <div className="wrap">
           <div className="section-head">
             <div>
