@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Brain, Search, Database, Code2, Users, Heart } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { PageShell } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
+import { icon } from "@/lib/icons";
+import content from "@/content.json";
+
+const c = content.pages.home;
 
 /* ── Animated stat counter ── */
 function StatCounter({ value, suffix = "", decimals = 0, label }: { value: number; suffix?: string; decimals?: number; label: string }) {
@@ -63,46 +67,7 @@ function MiniChart({ heights, variant }: { heights: number[]; variant: "dark" | 
 }
 
 /* ── Cap card with mouse-glow ── */
-const capabilities = [
-  {
-    icon: Brain,
-    title: "Generative AI Consulting",
-    body: "Agentic workflows, RAG systems, and operationalized analytics built for production-grade reliability.",
-    href: "/services",
-  },
-  {
-    icon: Search,
-    title: "Market Research & Insights",
-    body: "Primary surveys, interviews, FGDs and competitive intelligence with statistical rigor and human depth.",
-    href: "/services",
-  },
-  {
-    icon: Database,
-    title: "Data Engineering & Analytics",
-    body: "Pipelines, warehouses, BI dashboards, and visual storytelling that drives action — not slide decks.",
-    href: "/services",
-  },
-  {
-    icon: Code2,
-    title: "Software Services & Products",
-    body: "Full-stack product lifecycle: discovery, agile delivery, resilient deployment, and post-launch ops.",
-    href: "/services",
-  },
-  {
-    icon: Users,
-    title: "Staff Augmentation",
-    body: "Embed senior data scientists, ML engineers and analysts directly into your roadmap.",
-    href: "/careers",
-  },
-  {
-    icon: Heart,
-    title: "Social Enterprises & NGOs",
-    body: "Impact measurement, MIS platforms, and analytics for purpose-led organizations and field teams.",
-    href: "/services",
-  },
-];
-
-function CapCard({ icon: Icon, title, body, href }: (typeof capabilities)[0]) {
+function CapCard({ icon: IconName, title, body, href }: { icon: string; title: string; body: string; href: string }) {
   const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", (e.clientX - r.left) + "px");
@@ -111,7 +76,7 @@ function CapCard({ icon: Icon, title, body, href }: (typeof capabilities)[0]) {
   return (
     <article className="cap" onMouseMove={onMouseMove}>
       <div className="cap-ico">
-        <Icon size={22} strokeWidth={1.8} />
+        {icon(IconName, { size: 22, strokeWidth: 1.8 })}
       </div>
       <h3>{title}</h3>
       <p>{body}</p>
@@ -144,125 +109,84 @@ function HeroSpot() {
 }
 
 export default function Home() {
-  useSEO({
-    title: "Emulus Consulting LLP — Data-Backed Insights. AI-Driven Impact.",
-    description:
-      "Emulus is a global consulting partner for market research, data engineering, software, and Generative AI — helping enterprises and social-impact teams ship outcomes.",
-  });
+  useSEO(c.seo);
 
   return (
     <PageShell>
-      {/* ── HERO ── */}
       <section className="hero" id="top">
         <HeroSpot />
         <HeroBackdrop />
         <div className="wrap hero-grid" style={{ gridTemplateColumns: "1fr" }}>
           <div>
-            <p className="eyebrow"><span className="dot" /> Data-backed insights · AI-driven impact</p>
-            <h1>
-              Turn complex data<br />
-              into <span className="accent">decisions</span> that<br />
-              move your business.
-            </h1>
-            <p className="sub">
-              Emulus is a global consulting partner for market research, data engineering,
-              software, and Generative AI — helping enterprises and social-impact teams ship
-              outcomes, not just dashboards.
-            </p>
+            <p className="eyebrow"><span className="dot" /> {c.hero.eyebrow}</p>
+            <h1 dangerouslySetInnerHTML={{ __html: c.hero.heading.replace(c.hero.accentWord, `<span class="accent">${c.hero.accentWord}</span>`) }} />
+            <p className="sub">{c.hero.subtitle}</p>
             <div className="cta-row">
-              <Link to="/contact" className="btn btn-accent">
-                Book a discovery call
+              <Link to={c.hero.ctaPrimaryLink} className="btn btn-accent">
+                {c.hero.ctaPrimary}
                 <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
               </Link>
-              <Link to="/case-studies" className="btn btn-ghost">See case studies</Link>
+              <Link to={c.hero.ctaSecondaryLink} className="btn btn-ghost">{c.hero.ctaSecondary}</Link>
             </div>
             <div className="trust">
               <span className="avatars" aria-hidden="true">
-                <span>RD</span><span>EM</span><span>FA</span><span>SR</span>
+                {c.hero.trust.avatars.map((a: string) => <span key={a}>{a}</span>)}
               </span>
-              <span>Trusted by teams in <b style={{ color: "#131931" }}>4 countries</b> across pharma, BFSI &amp; impact.</span>
+              <span dangerouslySetInnerHTML={{ __html: c.hero.trust.text }} />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── MARQUEE ── */}
       <div className="marquee-strip" aria-label="Selected clients">
         <div className="marquee-row">
-          {["Pharma Co", "Global BFSI", "Life Sciences", "Rural Dev NGO", "Education Trust", "FinTech Lab", "MedTech Inc", "Impact Fund", "HealthLine", "Atlas Capital",
-            "Pharma Co", "Global BFSI", "Life Sciences", "Rural Dev NGO", "Education Trust", "FinTech Lab", "MedTech Inc", "Impact Fund", "HealthLine", "Atlas Capital"].map((n, i) => (
+          {[...c.marquee, ...c.marquee].map((n: string, i: number) => (
             <span key={i}>{n}</span>
           ))}
         </div>
       </div>
 
-      {/* ── STATS ── */}
       <div className="wrap" style={{ paddingTop: 80, paddingBottom: 0 }}>
         <div className="stats-grid">
-          <StatCounter value={4} label="Countries served" />
-          <StatCounter value={50} suffix="+" label="Engagements delivered" />
-          <StatCounter value={98.2} decimals={1} suffix="%" label="Avg. model accuracy" />
-          <StatCounter value={24} suffix="/7" label="On-call AI engineers" />
+          {c.stats.map((s: any) => (
+            <StatCounter key={s.label} value={s.value} suffix={s.suffix} decimals={s.decimals} label={s.label} />
+          ))}
         </div>
       </div>
 
-      {/* ── CAPABILITIES ── */}
       <section className="block" id="capabilities">
         <div className="wrap">
           <div className="section-head">
             <div>
-              <p className="eyebrow"><span className="dot" /> Capabilities</p>
-              <h2>Six capabilities,<br />one outcome: <em style={{ fontStyle: "normal", color: "#e54727" }}>clarity.</em></h2>
+              <p className="eyebrow"><span className="dot" /> {c.capabilities.eyebrow}</p>
+              <h2 dangerouslySetInnerHTML={{ __html: c.capabilities.heading.replace(c.capabilities.accentWord, `<em style="font-style:normal;color:#e54727">${c.capabilities.accentWord}</em>`) }} />
             </div>
-            <p>
-              We combine research rigor with engineering discipline and modern AI — a single
-              team that goes from raw data to working product, end to end.
-            </p>
+            <p>{c.capabilities.description}</p>
           </div>
           <div className="caps">
-            {capabilities.map((c) => <CapCard key={c.title} {...c} />)}
+            {c.capabilities.items.map((cap: any) => <CapCard key={cap.title} {...cap} />)}
           </div>
         </div>
       </section>
 
-      {/* ── PIPELINE / HOW WE WORK ── */}
       <section className="block pipeline-section" id="solutions">
         <div className="wrap">
           <div className="section-head">
             <div>
-              <p className="eyebrow on-dark"><span className="dot" /> How we work</p>
-              <h2>From raw data<br />→ insights<br />→ AI-driven decisions.</h2>
+              <p className="eyebrow on-dark"><span className="dot" /> {c.pipeline.eyebrow}</p>
+              <h2>{c.pipeline.heading}</h2>
             </div>
-            <p>
-              A three-stage operating model. Every engagement begins with measurable
-              outcomes, and ends with a live system your team owns.
-            </p>
+            <p>{c.pipeline.description}</p>
           </div>
           <div className="pipeline">
             <div className="pipe-line-bar" aria-hidden="true" />
-            {[
-              {
-                num: "01", title: "Raw Data",
-                body: "We integrate sources you already have — and the ones you didn't know you needed. Surveys, sensors, systems, field teams.",
-                tags: ["Surveys", "ETL", "Field ops", "APIs"],
-              },
-              {
-                num: "02", title: "Insights",
-                body: "Cleaned, modeled, contextualized. Statistical baselines meet business questions to produce signal — not noise.",
-                tags: ["Modeling", "BI", "Storytelling"],
-              },
-              {
-                num: "03", title: "AI-Driven Decisions",
-                body: "Insights operationalized through GenAI — agents, copilots and automations embedded where the work actually happens.",
-                tags: ["Agents", "RAG", "Automations", "Eval"],
-              },
-            ].map((s) => (
+            {c.pipeline.stages.map((s: any) => (
               <article key={s.num} className="pipe-card">
                 <div className="pipe-num">{s.num}</div>
                 <h3>{s.title}</h3>
                 <p>{s.body}</p>
                 <div className="pipe-tags">
-                  {s.tags.map((t) => <span key={t}>{t}</span>)}
+                  {s.tags.map((t: string) => <span key={t}>{t}</span>)}
                 </div>
               </article>
             ))}
@@ -270,100 +194,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── INDUSTRIES SPLIT ── */}
       <section className="block" id="industries">
         <div className="wrap">
           <div className="section-head">
             <div>
-              <p className="eyebrow"><span className="dot" /> Industries</p>
-              <h2>Built for enterprises.<br />Honed for impact.</h2>
+              <p className="eyebrow"><span className="dot" /> {c.industries.eyebrow}</p>
+              <h2>{c.industries.heading}</h2>
             </div>
-            <p>
-              Same toolkit, different velocity. We meet you where you are — whether that's
-              a regulated pharma rollout or a field-team MIS deployed in 12 districts.
-            </p>
+            <p>{c.industries.description}</p>
           </div>
           <div className="split">
             <article className="split-card dark">
               <div>
-                <p className="eyebrow on-dark"><span className="dot" /> Commercial clients</p>
-                <h3>Pharma, BFSI, life sciences &amp; enterprise.</h3>
-                <p>Decision intelligence, growth analytics and AI products built with the rigor that regulated industries require.</p>
+                <p className="eyebrow on-dark"><span className="dot" /> {c.industries.commercial.eyebrow}</p>
+                <h3>{c.industries.commercial.heading}</h3>
+                <p>{c.industries.commercial.body}</p>
                 <div className="tag-row">
-                  {["Pharma", "BFSI", "Life sciences", "SaaS"].map((t) => (
+                  {c.industries.commercial.tags.map((t: string) => (
                     <span key={t} className="split-tag">{t}</span>
                   ))}
                 </div>
               </div>
-              <MiniChart heights={[40, 55, 38, 68, 62, 80, 70, 92, 78, 88]} variant="dark" />
+              <MiniChart heights={c.industries.commercial.chartHeights} variant="dark" />
             </article>
             <article className="split-card light">
               <div>
-                <p className="eyebrow"><span className="dot" /> Social impact</p>
-                <h3>Driving impact you can measure.</h3>
-                <p>Custom MIS, results-monitoring platforms and analytics-driven program evaluation for NGOs and not-for-profits.</p>
+                <p className="eyebrow"><span className="dot" /> {c.industries.social.eyebrow}</p>
+                <h3>{c.industries.social.heading}</h3>
+                <p>{c.industries.social.body}</p>
                 <div className="tag-row">
-                  {["Education", "Health", "Livelihoods", "Field MIS"].map((t) => (
+                  {c.industries.social.tags.map((t: string) => (
                     <span key={t} className="split-tag">{t}</span>
                   ))}
                 </div>
               </div>
-              <MiniChart heights={[30, 45, 58, 50, 72, 62, 84, 70, 90, 78]} variant="light" />
+              <MiniChart heights={c.industries.social.chartHeights} variant="light" />
             </article>
           </div>
         </div>
       </section>
 
-      {/* ── SELECTED WORK ── */}
       <section className="block" id="work" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="section-head">
             <div>
-              <p className="eyebrow"><span className="dot" /> Selected work</p>
-              <h2>Outcomes, not output.</h2>
+              <p className="eyebrow"><span className="dot" /> {c.work.eyebrow}</p>
+              <h2>{c.work.heading}</h2>
             </div>
-            <p>
-              A few of the engagements we're proud of — from BFSI risk models to district-scale
-              impact dashboards.
-            </p>
+            <p>{c.work.description}</p>
           </div>
           <div className="cases">
-            {[
-              {
-                cover: "case-cover-navy",
-                tag: "Pharma · Decision Intelligence",
-                stat: "3.2×",
-                statLabel: "ROI",
-                title: "Forecasting field-rep effectiveness across 14 markets.",
-                body: "Replaced a spreadsheet-driven planning cycle with a live forecasting engine and embedded LLM summaries.",
-              },
-              {
-                cover: "case-cover-orange",
-                tag: "BFSI · Risk Modeling",
-                stat: "-38%",
-                statLabel: "defaults",
-                title: "Real-time credit-risk scoring on a streaming pipeline.",
-                body: "Cut decisioning latency from 6 hours to 90 seconds with a Spark + feature-store rebuild.",
-              },
-              {
-                cover: "case-cover-teal",
-                tag: "NGO · Impact MIS",
-                stat: "12",
-                statLabel: "districts",
-                title: "An MIS that turned 240 field workers into a real-time program.",
-                body: "Offline-first data collection + a results-monitoring dashboard funders can read at a glance.",
-              },
-            ].map((c) => (
-              <article key={c.title} className="case">
-                <div className={`case-cover ${c.cover}`}>
+            {c.work.items.map((item: any) => (
+              <article key={item.title} className="case">
+                <div className={`case-cover ${item.cover}`}>
                   <div className="case-meta">
-                    <span>{c.tag}</span>
-                    <span>{c.stat} {c.statLabel}</span>
+                    <span>{item.tag}</span>
+                    <span>{item.stat} {item.statLabel}</span>
                   </div>
                 </div>
                 <div className="case-body">
-                  <h3>{c.title}</h3>
-                  <p>{c.body}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.body}</p>
                   <Link to="/case-studies" className="case-read">Read case study →</Link>
                 </div>
               </article>
@@ -372,42 +263,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TESTIMONIAL ── */}
       <section className="block" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="testimonial">
-            <p className="eyebrow"><span className="dot" /> Client voices</p>
+            <p className="eyebrow"><span className="dot" /> {c.testimonial.eyebrow}</p>
             <blockquote>
-              <span className="quote-mark">&ldquo;</span>Emulus didn't sell us a dashboard — they re-wrote how our commercial team makes decisions. Eight weeks in, we'd pulled an entire planning cycle forward.<span className="quote-mark">&rdquo;</span>
+              <span className="quote-mark">&ldquo;</span>{c.testimonial.quote}<span className="quote-mark">&rdquo;</span>
             </blockquote>
             <div className="testimonial-meta">
-              <div className="t-ava">NK</div>
+              <div className="t-ava">{c.testimonial.avatar}</div>
               <div>
-                <div className="t-name">Nikhil Kapoor</div>
-                <div className="t-role">VP Strategy · Global Pharma</div>
+                <div className="t-name">{c.testimonial.name}</div>
+                <div className="t-role">{c.testimonial.role}</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── CTA ── */}
       <section style={{ padding: "80px 0 140px" }} id="contact">
         <div className="wrap">
           <div className="cta-card">
-            <p className="eyebrow on-dark" style={{ position: "relative" }}><span className="dot" /> Get in touch</p>
-            <h2 style={{ marginTop: 14 }}>
-              Ready to turn your data into <span className="accent">decisions</span>?
-            </h2>
-            <p className="cta-sub">
-              Scope a 30-minute discovery call. No slides, no fluff — just your data and what's possible with it.
-            </p>
+            <p className="eyebrow on-dark" style={{ position: "relative" }}><span className="dot" /> {c.cta.eyebrow}</p>
+            <h2 style={{ marginTop: 14 }} dangerouslySetInnerHTML={{ __html: c.cta.heading.replace(c.cta.accentWord, `<span class="accent">${c.cta.accentWord}</span>`) }} />
+            <p className="cta-sub">{c.cta.subtitle}</p>
             <div className="cta-buttons">
-              <Link to="/contact" className="btn btn-accent">
-                Book a discovery call
+              <Link to={c.cta.primaryLink} className="btn btn-accent">
+                {c.cta.primaryBtn}
                 <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
               </Link>
-              <Link to="/contact" className="btn btn-ghost on-dark">Email the team</Link>
+              <Link to={c.cta.secondaryLink} className="btn btn-ghost on-dark">{c.cta.secondaryBtn}</Link>
             </div>
           </div>
         </div>

@@ -3,16 +3,9 @@ import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "@/assets/logo.svg";
+import content from "@/content.json";
 
-const links = [
-  { to: "/", label: "Home", end: true },
-  { to: "/about", label: "About" },
-  { to: "/services", label: "Services" },
-  { to: "/industries", label: "Industries" },
-  { to: "/case-studies", label: "Case Studies" },
-  { to: "/careers", label: "Careers" },
-  { to: "/contact", label: "Contact" },
-];
+const c = content.header;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
@@ -29,11 +22,11 @@ export function SiteHeader() {
     <header className={`hdr${scrolled ? " scrolled" : ""}`}>
       <div className="wrap hdr-inner">
         <Link to="/" aria-label="Emulus home">
-          <img src={logo} alt="Emulus Consulting" style={{ height: 26 }} />
+          <img src={logo} alt={c.logoAlt} style={{ height: 26 }} />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-0.5" aria-label="Primary">
-          {links.map((l) => (
+          {c.links.map((l: any) => (
             <NavLink
               key={l.to}
               to={l.to}
@@ -53,7 +46,7 @@ export function SiteHeader() {
 
         <div className="hidden lg:flex items-center gap-2.5">
           <Link to="/contact" className="btn btn-primary btn-sm">
-            Book a call
+            {c.cta}
             <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
           </Link>
         </div>
@@ -77,7 +70,7 @@ export function SiteHeader() {
             className="lg:hidden bg-white border-t border-[rgba(19,25,49,0.08)] overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              {links.map((l) => (
+              {c.links.map((l: any) => (
                 <NavLink
                   key={l.to}
                   to={l.to}
@@ -97,7 +90,7 @@ export function SiteHeader() {
                 onClick={() => setOpen(false)}
                 className="mt-3 btn btn-accent w-full justify-center"
               >
-                Book a discovery call
+                {c.mobileCta}
               </Link>
             </div>
           </motion.div>

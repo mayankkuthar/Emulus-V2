@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from "@/assets/logo.svg";
+import content from "@/content.json";
+
+const c = content.footer;
 
 export function SiteFooter() {
   return (
@@ -7,44 +10,42 @@ export function SiteFooter() {
       <div className="wrap ft-grid">
         <div className="ft-brand">
           <img src={logo} alt="Emulus Consulting" />
-          <p>A global consulting and technology partner specializing in market research, data engineering, software services, and Generative AI.</p>
+          <p>{c.brandText}</p>
         </div>
 
         <div>
-          <h5>Explore</h5>
+          <h5>{c.exploreHeading}</h5>
           <ul>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/services">Services</Link></li>
-            <li><Link to="/case-studies">Case studies</Link></li>
-            <li><Link to="/industries">Industries</Link></li>
-            <li><Link to="/careers">Careers</Link></li>
+            {c.exploreLinks.map((l: any) => (
+              <li key={l.label}><Link to={l.to}>{l.label}</Link></li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h5>Global presence</h5>
+          <h5>{c.presenceHeading}</h5>
           <ul>
-            <li>India · HQ</li>
-            <li>Canada</li>
-            <li>Australia</li>
-            <li>Singapore</li>
+            {c.presenceList.map((p: string) => (
+              <li key={p}>{p}</li>
+            ))}
           </ul>
         </div>
 
         <div>
-          <h5>Get in touch</h5>
+          <h5>{c.contactHeading}</h5>
           <ul>
-            <li><Link to="/contact">hello@emulus.co</Link></li>
-            <li><Link to="/careers">Careers</Link></li>
-            <li><a href="#">Partnerships</a></li>
-            <li><a href="#">Press</a></li>
+            {c.contactLinks.map((l: any) => (
+              <li key={l.label}>
+                {l.to ? <Link to={l.to}>{l.label}</Link> : <a href="#">{l.label}</a>}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
 
       <div className="wrap ft-bottom">
-        <span>© {new Date().getFullYear()} Emulus Consulting LLP</span>
-        <span>Made with intent · From data to decisions</span>
+        <span>© {new Date().getFullYear()} {c.copyright}</span>
+        <span>{c.bottomTagline}</span>
       </div>
     </footer>
   );

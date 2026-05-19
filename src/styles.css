@@ -1151,9 +1151,10 @@
 
 /* ---------- Team cards ---------- */
 .team-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
 }
-@media (max-width: 900px) { .team-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } }
 .team-card {
   background: var(--c-mist);
   border: 1px solid var(--c-line);
@@ -1165,21 +1166,37 @@
 }
 .team-card:hover { transform: translateY(-6px); }
 .team-card .team-avatar {
-  width: 64px; height: 64px;
-  border-radius: 16px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
   background: linear-gradient(135deg, var(--c-orange) 0%, #b13417 100%);
   color: white; display: inline-flex; align-items: center; justify-content: center;
   font-size: 26px; font-weight: 600;
   font-family: var(--font-mono);
   box-shadow: 0 14px 28px -12px rgba(229,71,39,0.4);
+  overflow: hidden;
 }
-.team-card h3 { margin-top: 22px; font-size: 20px; font-weight: 600; }
+.team-card .team-avatar .team-photo {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.team-name-row {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 22px;
+}
+.team-name-row h3 { font-size: 20px; font-weight: 600; margin: 0; }
+.team-linkedin {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; border-radius: 50%;
+  color: #0a66c2; flex-shrink: 0;
+  transition: background .2s;
+}
+.team-linkedin:hover { background: rgba(10,102,194,0.1); }
 .team-card .team-role {
   margin-top: 2px;
   font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.14em; text-transform: uppercase; color: var(--c-orange);
 }
 .team-card p { margin-top: 14px; color: var(--c-ink-2); font-size: 14px; line-height: 1.55; }
+
 
 /* ---------- Country grid ---------- */
 .countries {
@@ -1362,9 +1379,9 @@
 .info-row {
   display: flex; gap: 16px; align-items: flex-start;
   padding: 18px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
-.info-row:last-of-type { border-bottom: none; }
+.info-row:first-child { border-top: none; }
 .info-row .info-ico {
   width: 42px; height: 42px; border-radius: 12px;
   background: rgba(255,255,255,0.06); color: var(--c-orange-2);

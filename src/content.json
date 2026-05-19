@@ -1,0 +1,376 @@
+{
+  "site": {
+    "name": "Emulus Consulting LLP",
+    "tagline": "Data-Backed Insights. AI-Driven Impact."
+  },
+  "header": {
+    "logoAlt": "Emulus Consulting",
+    "links": [
+      { "to": "/", "label": "Home", "end": true },
+      { "to": "/about", "label": "About" },
+      { "to": "/services", "label": "Services" },
+      { "to": "/industries", "label": "Industries" },
+      { "to": "/case-studies", "label": "Case Studies" },
+      { "to": "/careers", "label": "Careers" },
+      { "to": "/contact", "label": "Contact" }
+    ],
+    "cta": "Book a call",
+    "mobileCta": "Book a discovery call"
+  },
+  "footer": {
+    "brandText": "A global consulting and technology partner specializing in market research, data engineering, software services, and Generative AI.",
+    "exploreHeading": "Explore",
+    "exploreLinks": [
+      { "to": "/about", "label": "About" },
+      { "to": "/services", "label": "Services" },
+      { "to": "/case-studies", "label": "Case studies" },
+      { "to": "/industries", "label": "Industries" },
+      { "to": "/careers", "label": "Careers" }
+    ],
+    "presenceHeading": "Global presence",
+    "presenceList": ["India · HQ", "Canada", "Australia", "Singapore"],
+    "contactHeading": "Get in touch",
+    "contactLinks": [
+      { "to": "/contact", "label": "contact@emulus.co" },
+      { "to": "/careers", "label": "Careers" },
+      { "label": "Partnerships" },
+      { "label": "Press" }
+    ],
+    "copyright": "Emulus Consulting LLP",
+    "bottomTagline": "Made with intent · From data to decisions"
+  },
+  "pages": {
+    "home": {
+      "seo": {
+        "title": "Emulus Consulting LLP — Data-Backed Insights. AI-Driven Impact.",
+        "description": "Emulus is a global consulting partner for market research, data engineering, software, and Generative AI — helping enterprises and social-impact teams ship outcomes."
+      },
+      "hero": {
+        "eyebrow": "Data-backed insights · AI-driven impact",
+        "heading": "Turn complex data<br />into decisions that<br />move your business.",
+        "accentWord": "decisions",
+        "subtitle": "Emulus is a global consulting partner for market research, data engineering, software, and Generative AI — helping enterprises and social-impact teams ship outcomes, not just dashboards.",
+        "ctaPrimary": "Book a discovery call",
+        "ctaPrimaryLink": "/contact",
+        "ctaSecondary": "See case studies",
+        "ctaSecondaryLink": "/case-studies",
+        "trust": {
+          "avatars": ["RD", "EM", "FA", "SR"],
+          "text": "Trusted by teams in 4 countries across pharma, BFSI &amp; impact."
+        }
+      },
+      "marquee": [
+        "Pharma Co", "Global BFSI", "Life Sciences", "Rural Dev NGO", "Education Trust",
+        "FinTech Lab", "MedTech Inc", "Impact Fund", "HealthLine", "Atlas Capital"
+      ],
+      "stats": [
+        { "value": 4, "label": "Countries served" },
+        { "value": 50, "suffix": "+", "label": "Engagements delivered" },
+        { "value": 98.2, "decimals": 1, "suffix": "%", "label": "Avg. model accuracy" },
+        { "value": 24, "suffix": "/7", "label": "On-call AI engineers" }
+      ],
+      "capabilities": {
+        "eyebrow": "Capabilities",
+        "heading": "Six capabilities,<br />one outcome: clarity.",
+        "accentWord": "clarity",
+        "description": "We combine research rigor with engineering discipline and modern AI — a single team that goes from raw data to working product, end to end.",
+        "items": [
+          { "icon": "Brain", "title": "Generative AI Consulting", "body": "Agentic workflows, RAG systems, and operationalized analytics built for production-grade reliability.", "href": "/services" },
+          { "icon": "Search", "title": "Market Research & Insights", "body": "Primary surveys, interviews, FGDs and competitive intelligence with statistical rigor and human depth.", "href": "/services" },
+          { "icon": "Database", "title": "Data Engineering & Analytics", "body": "Pipelines, warehouses, BI dashboards, and visual storytelling that drives action — not slide decks.", "href": "/services" },
+          { "icon": "Code2", "title": "Software Services & Products", "body": "Full-stack product lifecycle: discovery, agile delivery, resilient deployment, and post-launch ops.", "href": "/services" },
+          { "icon": "Users", "title": "Staff Augmentation", "body": "Embed senior data scientists, ML engineers and analysts directly into your roadmap.", "href": "/careers" },
+          { "icon": "Heart", "title": "Social Enterprises & NGOs", "body": "Impact measurement, MIS platforms, and analytics for purpose-led organizations and field teams.", "href": "/services" }
+        ]
+      },
+      "pipeline": {
+        "eyebrow": "How we work",
+        "heading": "From raw data<br />→ insights<br />→ AI-driven decisions.",
+        "description": "A three-stage operating model. Every engagement begins with measurable outcomes, and ends with a live system your team owns.",
+        "stages": [
+          { "num": "01", "title": "Raw Data", "body": "We integrate sources you already have — and the ones you didn't know you needed. Surveys, sensors, systems, field teams.", "tags": ["Surveys", "ETL", "Field ops", "APIs"] },
+          { "num": "02", "title": "Insights", "body": "Cleaned, modeled, contextualized. Statistical baselines meet business questions to produce signal — not noise.", "tags": ["Modeling", "BI", "Storytelling"] },
+          { "num": "03", "title": "AI-Driven Decisions", "body": "Insights operationalized through GenAI — agents, copilots and automations embedded where the work actually happens.", "tags": ["Agents", "RAG", "Automations", "Eval"] }
+        ]
+      },
+      "industries": {
+        "eyebrow": "Industries",
+        "heading": "Built for enterprises.<br />Honed for impact.",
+        "description": "Same toolkit, different velocity. We meet you where you are — whether that's a regulated pharma rollout or a field-team MIS deployed in 12 districts.",
+        "commercial": {
+          "eyebrow": "Commercial clients",
+          "heading": "Pharma, BFSI, life sciences &amp; enterprise.",
+          "body": "Decision intelligence, growth analytics and AI products built with the rigor that regulated industries require.",
+          "tags": ["Pharma", "BFSI", "Life sciences", "SaaS"],
+          "chartHeights": [40, 55, 38, 68, 62, 80, 70, 92, 78, 88]
+        },
+        "social": {
+          "eyebrow": "Social impact",
+          "heading": "Driving impact you can measure.",
+          "body": "Custom MIS, results-monitoring platforms and analytics-driven program evaluation for NGOs and not-for-profits.",
+          "tags": ["Education", "Health", "Livelihoods", "Field MIS"],
+          "chartHeights": [30, 45, 58, 50, 72, 62, 84, 70, 90, 78]
+        }
+      },
+      "work": {
+        "eyebrow": "Selected work",
+        "heading": "Outcomes, not output.",
+        "description": "A few of the engagements we're proud of — from BFSI risk models to district-scale impact dashboards.",
+        "items": [
+          { "cover": "case-cover-navy", "tag": "Pharma · Decision Intelligence", "stat": "3.2×", "statLabel": "ROI", "title": "Forecasting field-rep effectiveness across 14 markets.", "body": "Replaced a spreadsheet-driven planning cycle with a live forecasting engine and embedded LLM summaries." },
+          { "cover": "case-cover-orange", "tag": "BFSI · Risk Modeling", "stat": "-38%", "statLabel": "defaults", "title": "Real-time credit-risk scoring on a streaming pipeline.", "body": "Cut decisioning latency from 6 hours to 90 seconds with a Spark + feature-store rebuild." },
+          { "cover": "case-cover-teal", "tag": "NGO · Impact MIS", "stat": "12", "statLabel": "districts", "title": "An MIS that turned 240 field workers into a real-time program.", "body": "Offline-first data collection + a results-monitoring dashboard funders can read at a glance." }
+        ]
+      },
+      "testimonial": {
+        "eyebrow": "Client voices",
+        "quote": "Emulus didn't sell us a dashboard — they re-wrote how our commercial team makes decisions. Eight weeks in, we'd pulled an entire planning cycle forward.",
+        "avatar": "NK",
+        "name": "Nikhil Kapoor",
+        "role": "VP Strategy · Global Pharma"
+      },
+      "cta": {
+        "eyebrow": "Get in touch",
+        "heading": "Ready to turn your data into decisions?",
+        "accentWord": "decisions",
+        "subtitle": "Scope a 30-minute discovery call. No slides, no fluff — just your data and what's possible with it.",
+        "primaryBtn": "Book a discovery call",
+        "primaryLink": "/contact",
+        "secondaryBtn": "Email the team",
+        "secondaryLink": "/contact"
+      }
+    },
+    "about": {
+      "seo": {
+        "title": "About — Emulus Consulting LLP",
+        "description": "Vision, purpose, values, and the team driving meaningful transformations through data and AI."
+      },
+      "hero": {
+        "kicker": "About us",
+        "title": "Consistently driving meaningful transformations through every engagement.",
+        "subtitle": "We transform complex data into actionable insights using best-in-class techniques, empowering businesses and social enterprises to achieve exceptional results."
+      },
+      "visionPurpose": {
+        "eyebrow": "What guides us",
+        "heading": "A clear vision.<br />A defined purpose.",
+        "description": "Two statements that orient every engagement — the destination we're heading toward, and the reason we exist as a firm.",
+        "vision": { "icon": "Target", "eyebrow": "Our vision", "heading": "Consistently drive meaningful transformations in our clients' businesses through every engagement." },
+        "purpose": { "icon": "Compass", "eyebrow": "Our purpose", "heading": "Transform complex data into actionable insights, empowering exceptional results." }
+      },
+      "values": {
+        "eyebrow": "Our core values",
+        "heading": "Three principles that shape every engagement.",
+        "description": "These aren't just wall-art values — they're operational commitments that show up in how we staff, scope, and deliver work.",
+        "items": [
+          { "icon": "Users2", "title": "Trusted Partners", "body": "Customer-focused, long-term partnerships built on transparency and outcomes." },
+          { "icon": "BookOpen", "title": "Respect for the Individual", "body": "Open to ideas, value contribution, and foster creativity in every engagement." },
+          { "icon": "Compass", "title": "Learn and Grow", "body": "Continuous learning, upskilling, and knowledge sharing across our global team." }
+        ]
+      },
+      "team": {
+        "eyebrow": "Our people",
+        "heading": "A global team grounded in research, engineering, and impact.",
+        "description": "Senior practitioners who've led data and AI work across pharma, BFSI, NGOs, and enterprise — and do it again for every client.",
+        "members": [
+          { "name": "Harish Brahmanyapura", "role": "CEO & Founder", "bio": "Over 25 year's market research experience with top market research agencies in India, Far East & Africa. Held leadership roles with the Kantar group - IMRB & Millward Brown.", "image": "/src/assets/1.jpg", "linkedin": "https://www.linkedin.com/in/harish-brahmanyapura-325823/" },
+          { "name": "Vineet Garg", "role": "Co-founder & COO", "bio": "Over 14 years of consulting and analytics experience across domains. Helmed multiple roles with companies like BCG, XL Catlin and WNS Global.", "image": "/src/assets/2.jpg", "linkedin": "https://www.linkedin.com/in/vineet-garg-66543923/" },
+          { "name": "Ritesh Malhotra", "role": "Director Sales and Marketing", "bio": "Over 20 years of experience in driving revenue growth, managing client relationships, and leading strategic marketing initiatives to achieve business objectives.", "image": "/src/assets/3.jpg", "linkedin": "https://www.linkedin.com/in/ritesh-malhotra-19657556/" },
+          { "name": "Shashwat Yadav", "role": "GenAI Consultant, SyncIQ", "bio": "IIT Delhi and ISB alum, Shashwat specializes in leveraging AI for operational improvements and strategic implementation of generative AI technologies.", "image": "/src/assets/4.jpg", "linkedin": "https://www.linkedin.com/in/shashwatyadav/" },
+          { "name": "Vikas Srivastava", "role": "GenAI Consultant, SyncIQ", "bio": "An IIT Delhi graduate with a strong B2B SaaS background, Vikas is skilled in cloud-agnostic systems and microservices, enhancing applications in enterprise AI.", "image": "/src/assets/5.jpg", "linkedin": "https://www.linkedin.com/in/vikassriv14/" },
+          { "name": "Sidharth Zutshi", "role": "Client Partner", "bio": "Over 15 years in Research and Analytics including roles at IQVIA, Accenture, and WNS. Sidharth specializes in delivering custom, data-driven solutions across various industries.", "image": "/src/assets/8.jpg", "linkedin": "https://www.linkedin.com/in/sidharthzutshi/" },
+          { "name": "Milind Sattur", "role": "Consultant ASEAN", "bio": "Over 26 years of experience across media research, advertising sales support and business development across Asia Pacific with companies like CNBC, Nokia interactive.", "image": "/src/assets/6.jpg", "linkedin": "https://www.linkedin.com/in/milindsattur/" },
+          { "name": "Neha Bhatia", "role": "Market Research Lead", "bio": "Over 15 years of experience on both agency and client side in market research; strong capabilities in insight generation and reporting.", "image": "/src/assets/7.jpg", "linkedin": "https://www.linkedin.com/in/neha-bhatia-aa9a6b229/" }
+        ]
+      },
+      "presence": {
+        "eyebrow": "Global presence",
+        "heading": "Global, but local — wherever our clients work.",
+        "description": "Four offices, one operating model. Every engagement is run by senior practitioners, not handed off to junior teams.",
+        "countries": [
+          { "name": "India", "info": "Headquarters", "marker": "HQ" },
+          { "name": "Canada", "info": "North America", "marker": "CA" },
+          { "name": "Australia", "info": "APAC", "marker": "AU" },
+          { "name": "Singapore", "info": "South-East Asia", "marker": "SG" }
+        ],
+        "cta": "Work with us",
+        "ctaLink": "/contact"
+      }
+    },
+    "services": {
+      "seo": {
+        "title": "Services — Emulus Consulting LLP",
+        "description": "Generative AI, research, data engineering, software services, staff augmentation, and impact analytics for NGOs."
+      },
+      "hero": {
+        "kicker": "Our services",
+        "title": "Six capabilities engineered to turn your data into decisions.",
+        "subtitle": "From discovery to deployment — research, engineering, and Generative AI delivered as one connected practice."
+      },
+      "jumpLabels": ["GenAI", "Research", "Data & analytics", "Software", "Staff aug", "Impact"],
+      "items": [
+        { "id": "genai", "icon": "Brain", "eyebrow": "01 · Generative AI", "title": "Generative AI Consulting", "body": "Help clients build AI-driven workflows, automate insights, and operationalize AI-enabled analytics — built for production, not just demos.", "bullets": ["LLM strategy & evaluation", "RAG and agent systems", "Productionizing GenAI workflows", "Eval harnesses & guardrails"] },
+        { "id": "research", "icon": "Search", "eyebrow": "02 · Market Research", "title": "Market Research & Insights", "body": "Primary (surveys, interviews, FGDs) and secondary (desk research, competitive intelligence) with a strong analytics layer.", "bullets": ["Quant & qual research design", "Competitive intelligence", "Insights synthesis & storytelling"] },
+        { "id": "data", "icon": "Database", "eyebrow": "03 · Data & Analytics", "title": "Data Engineering & Analytics", "body": "From data pipelines and warehousing to BI dashboards and visual storytelling that drives action.", "bullets": ["Modern data stacks", "Warehouse & lakehouse design", "BI dashboards & visualization"] },
+        { "id": "software", "icon": "Code2", "eyebrow": "04 · Software", "title": "Software Services & Products", "body": "Full-stack product lifecycle support, agile development, and deployment.", "bullets": ["MVP to scale", "Web, mobile and APIs", "DevOps & cloud delivery"] },
+        { "id": "staff", "icon": "Users", "eyebrow": "05 · Staff Augmentation", "title": "Staff Augmentation", "body": "Embed skilled data scientists, analysts, and AI engineers directly into your team.", "bullets": ["Vetted senior talent", "Flexible engagement models", "Knowledge transfer built-in"] },
+        { "id": "impact", "icon": "Heart", "eyebrow": "06 · Social Impact", "title": "Social Enterprises & NGOs", "body": "We partner with NGOs to build measurement platforms, MIS, and analytics-driven monitoring systems.", "bullets": ["Impact measurement frameworks", "Field MIS & dashboards", "Program evaluation"] }
+      ],
+      "cta": {
+        "eyebrow": "Start a project",
+        "heading": "Ready to turn your data into decisions?",
+        "accentWord": "decisions",
+        "subtitle": "Scope a 30-minute discovery call. No slides, no fluff — just your data.",
+        "primaryBtn": "Book a discovery call",
+        "primaryLink": "/contact",
+        "secondaryBtn": "Email the team",
+        "secondaryLink": "/contact"
+      }
+    },
+    "industries": {
+      "seo": {
+        "title": "Industries — Emulus Consulting LLP",
+        "description": "Pharma, life sciences, BFSI, social impact, enterprise and rural development sectors we serve."
+      },
+      "hero": {
+        "kicker": "Industries",
+        "title": "Where we deliver outcomes.",
+        "subtitle": "From regulated enterprise environments to community-led social impact work — same rigor, tailored approach."
+      },
+      "section": {
+        "eyebrow": "Sectors we serve",
+        "heading": "Six industries.<br />One standard of rigour.",
+        "description": "Regulated or impact-driven, enterprise or field-team — we adapt our practice to your sector's pace and constraints.",
+        "items": [
+          { "icon": "Pill", "num": "01", "name": "Pharma", "body": "Commercial analytics, market access, and AI-enabled medical insights." },
+          { "icon": "Microscope", "num": "02", "name": "Life Sciences", "body": "Research automation, evidence synthesis, and decision support." },
+          { "icon": "Landmark", "num": "03", "name": "BFSI", "body": "Risk, fraud, customer intelligence, and Gen AI for operations." },
+          { "icon": "Building2", "num": "04", "name": "Enterprise", "body": "Modern data platforms, MLOps, and product engineering at scale." },
+          { "icon": "HeartHandshake", "num": "05", "name": "Social Impact", "body": "Impact measurement and monitoring platforms for NGOs." },
+          { "icon": "Sprout", "num": "06", "name": "Rural Development", "body": "Field data systems and analytics for grassroots organizations." }
+        ]
+      },
+      "cta": {
+        "eyebrow": "Work with us",
+        "heading": "Same toolkit, different velocity.",
+        "accentWord": "velocity",
+        "subtitle": "We meet you where you are — whether that's a regulated pharma rollout or a field-team MIS deployed in 12 districts.",
+        "primaryBtn": "Book a discovery call",
+        "primaryLink": "/contact",
+        "secondaryBtn": "See our services",
+        "secondaryLink": "/services"
+      }
+    },
+    "caseStudies": {
+      "seo": {
+        "title": "Case Studies — Emulus Consulting LLP",
+        "description": "Selected work across commercial enterprises, NGOs, and social-impact organizations."
+      },
+      "hero": {
+        "kicker": "Case studies",
+        "title": "Outcomes we've delivered — across business and impact.",
+        "subtitle": "A selection of anonymized engagements. Reach out for detailed walkthroughs."
+      },
+      "section": {
+        "eyebrow": "Our work",
+        "heading": "Results that speak<br />for themselves.",
+        "description": "Every engagement has a measurable outcome. Here are a few — from BFSI risk models to district-scale impact dashboards.",
+        "items": [
+          { "tag": "Education NGO · India", "title": "Field MIS that scaled to 2M+ student records", "body": "We built a low-bandwidth field data platform with offline-first sync and dashboards used by district teams.", "stat": "2M+", "statLabel": "records managed" },
+          { "tag": "Global Pharma", "title": "Generative AI for medical insight synthesis", "body": "RAG pipeline over internal research repositories cut analyst time on literature review by 64%.", "stat": "64%", "statLabel": "time saved" },
+          { "tag": "Rural Development Partner", "title": "Impact measurement for water & livelihoods", "body": "Designed an outcomes framework and dashboards tracking 14 indicators across 800+ villages.", "stat": "800+", "statLabel": "villages tracked" },
+          { "tag": "BFSI Enterprise", "title": "Customer intelligence on a modern stack", "body": "Re-platformed analytics with a lakehouse and rolled out 12 cross-functional BI products in 4 months.", "stat": "12", "statLabel": "BI products shipped" }
+        ]
+      },
+      "cta": {
+        "eyebrow": "Let's talk",
+        "heading": "Want a detailed walkthrough?",
+        "accentWord": "walkthrough",
+        "subtitle": "We're happy to share anonymized deep-dives on any of these engagements over a 30-minute call.",
+        "primaryBtn": "Book a call",
+        "primaryLink": "/contact",
+        "secondaryBtn": "Email the team",
+        "secondaryLink": "/contact"
+      }
+    },
+    "careers": {
+      "seo": {
+        "title": "Careers & Staff Augmentation — Emulus",
+        "description": "Embed our data scientists, analysts and AI engineers in your team — or join ours."
+      },
+      "hero": {
+        "kicker": "Careers & staff augmentation",
+        "title": "Plug in expert talent. Or join a team that does.",
+        "subtitle": "Our staff augmentation model lets you scale capability without overhead — embedded data scientists, analysts, and AI engineers, ready to ship."
+      },
+      "staffAug": {
+        "eyebrow": "Staff augmentation",
+        "heading": "Your team, extended with senior practitioners.",
+        "description": "We embed skilled data scientists, analysts, and AI engineers directly into your team — aligned to your stack, culture, and rituals from day one.",
+        "reasons": [
+          { "icon": "Plug", "title": "Embed our experts", "body": "Senior individuals or full pods aligned to your stack and rituals." },
+          { "icon": "Briefcase", "title": "Flexible engagements", "body": "Time-boxed sprints, multi-quarter retainers, or outcomes-based scopes." },
+          { "icon": "GraduationCap", "title": "Knowledge transfer", "body": "We hand-off cleanly with documentation, playbooks and training built-in." }
+        ]
+      },
+      "openRoles": {
+        "eyebrow": "Open roles",
+        "heading": "Join a team building the<br />next generation of data systems.",
+        "description": "We're always looking for talented people. If you don't see a role that fits, reach out anyway — we hire for potential and craft.",
+        "roles": [
+          { "title": "Senior Data Scientist", "type": "Full-time · Remote-first", "tags": ["Python", "ML", "Statistics"] },
+          { "title": "Gen AI Engineer", "type": "Contract / Staff Aug", "tags": ["LLMs", "RAG", "Python"] },
+          { "title": "Data Analyst — Impact", "type": "Full-time · India", "tags": ["SQL", "BI", "Excel"] }
+        ]
+      },
+      "cta": {
+        "eyebrow": "Join us",
+        "heading": "Want to join Emulus? We're always meeting talented people.",
+        "accentWord": "talented people",
+        "subtitle": "Send us your CV and what you're excited about building next.",
+        "primaryBtn": "Get in touch",
+        "primaryLink": "/contact"
+      }
+    },
+    "contact": {
+      "seo": {
+        "title": "Contact — Emulus Consulting LLP",
+        "description": "Book a discovery call or reach our global offices in India, Canada, Australia, and Singapore."
+      },
+      "hero": {
+        "kicker": "Contact",
+        "title": "Let's turn your data into decisions.",
+        "subtitle": "Tell us a bit about what you're working on. We'll get back within one business day."
+      },
+      "form": {
+        "eyebrow": "Send a message",
+        "fields": [
+          { "label": "Full name", "name": "name", "required": true },
+          { "label": "Work email", "name": "email", "type": "email", "required": true },
+          { "label": "Company", "name": "company" },
+          { "label": "Country", "name": "country" }
+        ],
+        "textareaLabel": "How can we help?",
+        "textareaPlaceholder": "Project context, timelines, anything else...",
+        "footnote": "We reply within one business day.",
+        "submitText": "Send message",
+        "sentText": "Thanks — we'll be in touch!"
+      },
+      "info": {
+        "eyebrow": "Get in touch",
+        "email": "contact@emulus.co",
+        "phone": "+1 (647) 503-0752 · +91 99999 87764\n+65 8660 1067 · +61 49 320 9337",
+        "offices": "India · Canada · Australia · Singapore",
+        "responseEyebrow": "Response time",
+        "responseText": "We typically reply within one business day."
+      }
+    },
+    "notFound": {
+      "seo": { "title": "404 — Page not found" },
+      "kicker": "404",
+      "heading": "Page not found.",
+      "subtitle": "The page you're looking for doesn't exist or has been moved.",
+      "btnText": "Go home",
+      "btnLink": "/"
+    }
+  }
+}
