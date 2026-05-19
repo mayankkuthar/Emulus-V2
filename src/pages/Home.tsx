@@ -1,132 +1,9 @@
 import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Brain, Search, Database, Code2, Users, Heart } from "lucide-react";
+import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { PageShell } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
-
-/* ── Animated SVG chart panel ── */
-const logs = [
-  "ingest::pipeline.v3 → batch 4,812 rows",
-  "model::risk-score → inference 12ms",
-  "genai::summary → 24 tokens drafted",
-  "segment::cohort_A → drift 0.04σ",
-  "eval::accuracy → 98.2% holdout",
-  "agent::plan → 3 actions queued",
-  "kpi::churn → -3.4% wow",
-  "feature::v_engagement → recomputed",
-];
-
-function HeroDataPanel() {
-  const lineRef = useRef<SVGPathElement>(null);
-  const areaRef = useRef<SVGPathElement>(null);
-  const dotRef = useRef<SVGCircleElement>(null);
-  const phase = useRef(0);
-  const [logIdx, setLogIdx] = useState(0);
-  const [kpis, setKpis] = useState(["0", "0%", "0"]);
-
-  useEffect(() => {
-    const W = 600, H = 260, pts = 36;
-    const render = () => {
-      let d = "";
-      let lx = 0, ly = 0;
-      for (let i = 0; i < pts; i++) {
-        const x = (i / (pts - 1)) * W;
-        const t = i / (pts - 1);
-        const y =
-          90 - t * 60 +
-          Math.sin(i * 0.5 + phase.current) * 14 +
-          Math.sin(i * 0.17 + phase.current * 0.7) * 18 +
-          Math.cos(i * 0.31 + phase.current * 1.3) * 8 +
-          (1 - t) * 14;
-        d += (i === 0 ? "M" : "L") + x.toFixed(1) + " " + y.toFixed(1) + " ";
-        lx = x; ly = y;
-      }
-      lineRef.current?.setAttribute("d", d);
-      areaRef.current?.setAttribute("d", d + `L${W} ${H} L0 ${H}Z`);
-      dotRef.current?.setAttribute("cx", lx.toFixed(1));
-      dotRef.current?.setAttribute("cy", ly.toFixed(1));
-    };
-    render();
-    const id = setInterval(() => { phase.current += 0.06; render(); }, 60);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const id = setInterval(() => setLogIdx((i) => (i + 1) % logs.length), 2200);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const targets = [12834, 98.2, 47];
-    const dur = 1800;
-    const t0 = performance.now();
-    const tick = () => {
-      const k = Math.min(1, (performance.now() - t0) / dur);
-      const e = 1 - Math.pow(1 - k, 3);
-      setKpis([
-        (targets[0] * e | 0).toLocaleString(),
-        (targets[1] * e).toFixed(1) + "%",
-        (targets[2] * e | 0).toString(),
-      ]);
-      if (k < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, []);
-
-  return (
-    <div className="hero-vis">
-      <div className="panel-head">
-        <span className="panel-title">
-          <span className="dots-os"><i /><i /><i /></span>
-          <span><b>emulus.</b>insights · production</span>
-        </span>
-        <span className="panel-title" style={{ opacity: 0.7, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "50%" }}>
-          {logs[logIdx]}
-        </span>
-      </div>
-
-      <div className="chart">
-        <div className="chart-grid" />
-        <div className="chart-labels">
-          <span className="live-pill"><i />Live</span>
-          <span>Decisions / hour · <b>last 24h</b></span>
-        </div>
-        <svg viewBox="0 0 600 260" preserveAspectRatio="none" style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}>
-          <defs>
-            <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0%" stopColor="#ff8d5e" />
-              <stop offset="100%" stopColor="#e54727" />
-            </linearGradient>
-            <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="rgba(229,71,39,0.35)" />
-              <stop offset="100%" stopColor="rgba(229,71,39,0)" />
-            </linearGradient>
-          </defs>
-          <path ref={areaRef} fill="url(#areaGrad)" />
-          <path ref={lineRef} stroke="url(#lineGrad)" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          <circle ref={dotRef} r="5" fill="#e54727">
-            <animate attributeName="r" values="5;9;5" dur="1.6s" repeatCount="indefinite" />
-            <animate attributeName="opacity" values="1;0.4;1" dur="1.6s" repeatCount="indefinite" />
-          </circle>
-        </svg>
-      </div>
-
-      <div className="kpis">
-        {[
-          { lab: "Records / sec", val: kpis[0], delta: "+18.4% wow" },
-          { lab: "Model accuracy", val: kpis[1], delta: "+1.2 pts" },
-          { lab: "Agents online", val: kpis[2], delta: "+6 today" },
-        ].map((k) => (
-          <div key={k.lab} className="kpi">
-            <div className="lab">{k.lab}</div>
-            <div className="val">{k.val}</div>
-            <div className="delta">{k.delta}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
 
 /* ── Animated stat counter ── */
 function StatCounter({ value, suffix = "", decimals = 0, label }: { value: number; suffix?: string; decimals?: number; label: string }) {
@@ -278,7 +155,8 @@ export default function Home() {
       {/* ── HERO ── */}
       <section className="hero" id="top">
         <HeroSpot />
-        <div className="wrap hero-grid">
+        <HeroBackdrop />
+        <div className="wrap hero-grid" style={{ gridTemplateColumns: "1fr" }}>
           <div>
             <p className="eyebrow"><span className="dot" /> Data-backed insights · AI-driven impact</p>
             <h1>
@@ -305,7 +183,6 @@ export default function Home() {
               <span>Trusted by teams in <b style={{ color: "#131931" }}>4 countries</b> across pharma, BFSI &amp; impact.</span>
             </div>
           </div>
-          <HeroDataPanel />
         </div>
       </section>
 

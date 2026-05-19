@@ -52,7 +52,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-2.5">
-          <Link to="/contact" className="btn btn-ghost btn-sm">Sign in</Link>
           <Link to="/contact" className="btn btn-primary btn-sm">
             Book a call
             <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
