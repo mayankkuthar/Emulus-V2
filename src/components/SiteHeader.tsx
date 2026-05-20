@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useBooking } from "@/lib/BookingContext";
 import logo from "@/assets/logo.svg";
 import content from "@/content.json";
 
@@ -10,6 +11,7 @@ const c = content.header;
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const booking = useBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -45,10 +47,10 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-2.5">
-          <Link to="/contact" className="btn btn-primary btn-sm">
+          <button onClick={() => booking.setOpen(true)} className="btn btn-primary btn-sm">
             {c.cta}
             <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
-          </Link>
+          </button>
         </div>
 
         <button
@@ -85,13 +87,12 @@ export function SiteHeader() {
                   {l.label}
                 </NavLink>
               ))}
-              <Link
-                to="/contact"
-                onClick={() => setOpen(false)}
+              <button
+                onClick={() => { setOpen(false); booking.setOpen(true); }}
                 className="mt-3 btn btn-accent w-full justify-center"
               >
                 {c.mobileCta}
-              </Link>
+              </button>
             </div>
           </motion.div>
         )}

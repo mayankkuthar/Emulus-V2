@@ -1,6 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { AnimatePresence, motion, type Variants } from "framer-motion";
+import { BookingProvider } from "@/lib/BookingContext";
+import { BookDiscoveryCall } from "@/components/BookDiscoveryCall";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
@@ -35,7 +37,7 @@ function PageWrap({ children }: { children: React.ReactNode }) {
 export default function App() {
   const location = useLocation();
   return (
-    <>
+    <BookingProvider>
       <ScrollToTop />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -49,6 +51,7 @@ export default function App() {
           <Route path="*" element={<PageWrap><NotFound /></PageWrap>} />
         </Routes>
       </AnimatePresence>
-    </>
+      <BookDiscoveryCall />
+    </BookingProvider>
   );
 }

@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import { PageShell } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
+import { useBooking } from "@/lib/BookingContext";
 import { icon } from "@/lib/icons";
 import content from "@/content.json";
 
@@ -110,6 +111,7 @@ function HeroSpot() {
 
 export default function Home() {
   useSEO(c.seo);
+  const booking = useBooking();
 
   return (
     <PageShell>
@@ -122,10 +124,10 @@ export default function Home() {
             <h1 dangerouslySetInnerHTML={{ __html: c.hero.heading.replace(c.hero.accentWord, `<span class="accent">${c.hero.accentWord}</span>`) }} />
             <p className="sub">{c.hero.subtitle}</p>
             <div className="cta-row">
-              <Link to={c.hero.ctaPrimaryLink} className="btn btn-accent">
+              <button onClick={() => booking.setOpen(true)} className="btn btn-accent">
                 {c.hero.ctaPrimary}
                 <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
-              </Link>
+              </button>
               <Link to={c.hero.ctaSecondaryLink} className="btn btn-ghost">{c.hero.ctaSecondary}</Link>
             </div>
             <div className="trust">
@@ -174,7 +176,7 @@ export default function Home() {
           <div className="section-head">
             <div>
               <p className="eyebrow on-dark"><span className="dot" /> {c.pipeline.eyebrow}</p>
-              <h2>{c.pipeline.heading}</h2>
+              <h2 dangerouslySetInnerHTML={{ __html: c.pipeline.heading }} />
             </div>
             <p>{c.pipeline.description}</p>
           </div>
@@ -199,7 +201,7 @@ export default function Home() {
           <div className="section-head">
             <div>
               <p className="eyebrow"><span className="dot" /> {c.industries.eyebrow}</p>
-              <h2>{c.industries.heading}</h2>
+              <h2 dangerouslySetInnerHTML={{ __html: c.industries.heading }} />
             </div>
             <p>{c.industries.description}</p>
           </div>
@@ -288,10 +290,10 @@ export default function Home() {
             <h2 style={{ marginTop: 14 }} dangerouslySetInnerHTML={{ __html: c.cta.heading.replace(c.cta.accentWord, `<span class="accent">${c.cta.accentWord}</span>`) }} />
             <p className="cta-sub">{c.cta.subtitle}</p>
             <div className="cta-buttons">
-              <Link to={c.cta.primaryLink} className="btn btn-accent">
+              <button onClick={() => booking.setOpen(true)} className="btn btn-accent">
                 {c.cta.primaryBtn}
                 <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
-              </Link>
+              </button>
               <Link to={c.cta.secondaryLink} className="btn btn-ghost on-dark">{c.cta.secondaryBtn}</Link>
             </div>
           </div>

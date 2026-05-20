@@ -41,7 +41,7 @@ export default function Careers() {
           <div className="section-head">
             <div>
               <p className="eyebrow"><span className="dot" /> {c.openRoles.eyebrow}</p>
-              <h2>{c.openRoles.heading}</h2>
+              <h2 dangerouslySetInnerHTML={{ __html: c.openRoles.heading }} />
             </div>
             <p>{c.openRoles.description}</p>
           </div>

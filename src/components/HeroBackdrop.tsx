@@ -55,7 +55,7 @@ export function HeroBackdrop() {
   ];
 
   return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden">
+    <div ref={ref} className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Mouse spotlight */}
       <motion.div
         className="absolute inset-0 pointer-events-none"

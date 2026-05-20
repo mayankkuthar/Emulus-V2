@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
+import { useBooking } from "@/lib/BookingContext";
 import { icon } from "@/lib/icons";
 import content from "@/content.json";
 
@@ -8,6 +9,7 @@ const c = content.pages.industries;
 
 export default function Industries() {
   useSEO(c.seo);
+  const booking = useBooking();
   return (
     <PageShell>
       <PageHero kicker={c.hero.kicker} title={c.hero.title} subtitle={c.hero.subtitle} />
@@ -17,7 +19,7 @@ export default function Industries() {
           <div className="section-head">
             <div>
               <p className="eyebrow"><span className="dot" /> {c.section.eyebrow}</p>
-              <h2>{c.section.heading}</h2>
+              <h2 dangerouslySetInnerHTML={{ __html: c.section.heading }} />
             </div>
             <p>{c.section.description}</p>
           </div>
@@ -43,7 +45,7 @@ export default function Industries() {
             <h2 style={{ marginTop: 14 }} dangerouslySetInnerHTML={{ __html: c.cta.heading.replace(c.cta.accentWord, `<span class="accent">${c.cta.accentWord}</span>`) }} />
             <p className="cta-sub">{c.cta.subtitle}</p>
             <div className="cta-buttons">
-              <Link to={c.cta.primaryLink} className="btn btn-accent">{c.cta.primaryBtn}</Link>
+              <button onClick={() => booking.setOpen(true)} className="btn btn-accent">{c.cta.primaryBtn}</button>
               <Link to={c.cta.secondaryLink} className="btn btn-ghost on-dark">{c.cta.secondaryBtn}</Link>
             </div>
           </div>

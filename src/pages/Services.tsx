@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { PageShell, PageHero } from "@/components/PageShell";
 import { ArrowRight } from "lucide-react";
 import { useSEO } from "@/lib/useSEO";
+import { useBooking } from "@/lib/BookingContext";
 import { icon } from "@/lib/icons";
 import content from "@/content.json";
 
@@ -9,6 +10,7 @@ const c = content.pages.services;
 
 export default function Services() {
   useSEO(c.seo);
+  const booking = useBooking();
   return (
     <PageShell>
       <PageHero kicker={c.hero.kicker} title={c.hero.title} subtitle={c.hero.subtitle} />
@@ -49,10 +51,10 @@ export default function Services() {
             <h2 style={{ marginTop: 14 }} dangerouslySetInnerHTML={{ __html: c.cta.heading.replace(c.cta.accentWord, `<span class="accent">${c.cta.accentWord}</span>`) }} />
             <p className="cta-sub">{c.cta.subtitle}</p>
             <div className="cta-buttons">
-              <Link to={c.cta.primaryLink} className="btn btn-accent">
+              <button onClick={() => booking.setOpen(true)} className="btn btn-accent">
                 {c.cta.primaryBtn}
                 <ArrowRight className="arr" style={{ width: 14, height: 14 }} />
-              </Link>
+              </button>
               <Link to={c.cta.secondaryLink} className="btn btn-ghost on-dark">{c.cta.secondaryBtn}</Link>
             </div>
           </div>
