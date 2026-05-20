@@ -217,7 +217,7 @@ export function BookDiscoveryCall() {
                       <CalendarIcon size={16} className="text-[#4b5474] shrink-0" />
                     </button>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0 rounded-xl" align="start">
+                  <PopoverContent className="w-auto p-0 rounded-xl !z-[80]" align="start">
                     <Calendar
                       mode="single"
                       selected={date}
@@ -246,7 +246,7 @@ export function BookDiscoveryCall() {
                       )}
                     </SelectValue>
                   </SelectTrigger>
-                  <SelectContent className="rounded-xl max-h-60">
+                  <SelectContent className="rounded-xl max-h-60 !z-[80]">
                     {TIME_SLOTS.map((slot) => (
                       <SelectItem key={slot} value={slot}>
                         {slot}
