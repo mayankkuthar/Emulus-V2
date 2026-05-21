@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
+import OutcomeOrb from "@/components/OutcomeOrb";
 import { PageShell } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
 import { useBooking } from "@/lib/BookingContext";
@@ -118,7 +119,7 @@ export default function Home() {
       <section className="hero" id="top">
         <HeroSpot />
         <HeroBackdrop />
-        <div className="wrap hero-grid" style={{ gridTemplateColumns: "1fr" }}>
+        <div className="wrap hero-grid">
           <div>
             <p className="eyebrow"><span className="dot" /> {c.hero.eyebrow}</p>
             <h1 dangerouslySetInnerHTML={{ __html: c.hero.heading.replace(c.hero.accentWord, `<span class="accent">${c.hero.accentWord}</span>`) }} />
@@ -137,6 +138,7 @@ export default function Home() {
               <span dangerouslySetInnerHTML={{ __html: c.hero.trust.text }} />
             </div>
           </div>
+          <OutcomeOrb />
         </div>
       </section>
 
