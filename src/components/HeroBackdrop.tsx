@@ -76,7 +76,7 @@ export function HeroBackdrop() {
 
       {/* Orange orb */}
       <motion.div
-        className="absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full blur-3xl opacity-40"
+        className="hero-orb hero-orb--orange absolute -top-32 -right-32 w-[520px] h-[520px] rounded-full blur-3xl opacity-40"
         style={{
           background: "radial-gradient(circle, #E54727 0%, transparent 65%)",
           x: orangeX, y: orangeY,
@@ -86,7 +86,7 @@ export function HeroBackdrop() {
       />
       {/* Teal/blue orb */}
       <motion.div
-        className="absolute -bottom-40 -left-20 w-[600px] h-[600px] rounded-full blur-3xl opacity-30"
+        className="hero-orb hero-orb--teal absolute -bottom-40 -left-20 w-[600px] h-[600px] rounded-full blur-3xl opacity-30"
         style={{
           background: "radial-gradient(circle, #3F8FD9 0%, transparent 65%)",
           x: blueX, y: blueY,

@@ -970,6 +970,30 @@
   }
 }
 
+/* ---------- Mobile responsive ---------- */
+@media (max-width: 480px) {
+  .oo-orb .oo-canvas {
+    transform: scale(0.85);
+    transform-origin: center center;
+  }
+}
+
+/* ---------- Hero backdrop mobile ---------- */
+@media (max-width: 640px) {
+  .hero-orb.hero-orb--orange {
+    width: 300px;
+    height: 300px;
+    top: -3rem;
+    right: -3rem;
+  }
+  .hero-orb.hero-orb--teal {
+    width: 340px;
+    height: 340px;
+    bottom: -6rem;
+    left: -4rem;
+  }
+}
+
 /* ---------- Marquee ---------- */
 .marquee-strip {
   border-top: 1px solid var(--c-line);

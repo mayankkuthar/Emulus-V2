@@ -51,7 +51,7 @@ export default function OutcomeOrb() {
   return (
     <div className="oo-orb">
       {/* Canvas */}
-      <div style={{ position: "relative", width: 380, height: 380, flexShrink: 0 }}>
+      <div className="oo-canvas" style={{ position: "relative", width: 380, height: 380, flexShrink: 0 }}>
         {/* Static rings */}
         {[200, 310].map((size) => (
           <div
