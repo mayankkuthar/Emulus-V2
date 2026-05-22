@@ -4,6 +4,7 @@ import {
   Pill, Landmark, Microscope, HeartHandshake, Building2, Sprout,
   ArrowUpRight, Plug, Briefcase, GraduationCap,
   Mail, Phone, MapPin, Send, Menu, X,
+  Camera, Scan, Layout, TrendingUp,
 } from "lucide-react";
 import type { ReactNode } from "react";
 
@@ -13,6 +14,7 @@ const map: Record<string, React.ComponentType<{ size?: number; strokeWidth?: num
   Pill, Landmark, Microscope, HeartHandshake, Building2, Sprout,
   ArrowUpRight, Plug, Briefcase, GraduationCap,
   Mail, Phone, MapPin, Send, Menu, X,
+  Camera, Scan, Layout, TrendingUp,
 };
 
 export function icon(name: string, props?: { size?: number; strokeWidth?: number }): ReactNode {

@@ -970,8 +970,12 @@
   }
 }
 
-/* ---------- Mobile responsive ---------- */
+/* ---------- Orb mobile ---------- */
 @media (max-width: 480px) {
+  .oo-orb {
+    width: 380px;
+    margin: 0 auto;
+  }
   .oo-orb .oo-canvas {
     transform: scale(0.85);
     transform-origin: center center;
@@ -1191,6 +1195,28 @@
   border-color: var(--c-orange);
   transform: rotate(-6deg) scale(1.05);
 }
+.cap .cap-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--c-orange);
+  background: var(--c-mist);
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  padding: 2px 10px;
+  line-height: 1;
+  height: 24px;
+  transition: background 0.3s, color 0.3s;
+}
+.cap:hover .cap-num {
+  background: var(--c-orange);
+  color: white;
+  border-color: var(--c-orange);
+}
 .cap h3 {
   margin-top: 22px;
   font-size: 20px;
@@ -1223,6 +1249,82 @@
   transform: translateY(0);
   color: var(--c-orange);
   gap: 10px;
+}
+
+/* ---------- GV Story scene cards ---------- */
+.gv-scenes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 1000px) {
+  .gv-scenes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  .gv-scenes {
+    grid-template-columns: 1fr;
+  }
+}
+.gv-scene {
+  background: white;
+  border: 1px solid var(--c-line);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+.gv-scene:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px -8px rgba(0,0,0,0.1);
+}
+.gv-scene .gv-scene-visual {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--c-navy);
+  line-height: 0;
+}
+.gv-scene .gv-scene-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.gv-scene .gv-scene-body {
+  padding: 24px 24px 28px;
+}
+.gv-scene .gv-scene-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--c-orange);
+  background: var(--c-mist);
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  padding: 2px 10px;
+  line-height: 1;
+  height: 24px;
+  transition: background 0.3s, color 0.3s;
+}
+.gv-scene:hover .gv-scene-num {
+  background: var(--c-orange);
+  color: white;
+  border-color: var(--c-orange);
+}
+.gv-scene .gv-scene-body h3 {
+  margin-top: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.gv-scene .gv-scene-body p {
+  margin-top: 8px;
+  color: var(--c-ink-2);
+  font-size: 14.5px;
+  line-height: 1.55;
 }
 
 /* ---------- Pipeline / How we work ---------- */

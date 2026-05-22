@@ -121,6 +121,56 @@
           }
         ]
       },
+      "gvStory": {
+        "eyebrow": "Case Study",
+        "heading": "Paper to Pixels:<br />The Six Senses of GV Story",
+        "accentWord": "Six Senses",
+        "description": "From the first stroke of ink in a village ledger to real-time intelligence powering rural India. A cinematic case study in six scenes.",
+        "items": [
+          {
+            "icon": "BookOpen",
+            "num": "01",
+            "title": "The Weight of Paper",
+            "body": "Millions of transactions. Recorded by hand. Invisible to the world.",
+            "scene": "Scene1Problem"
+          },
+          {
+            "icon": "Camera",
+            "num": "02",
+            "title": "One Photograph",
+            "body": "A single tap. The entire intervention — frictionless, familiar, powerful.",
+            "scene": "Scene2Photograph"
+          },
+          {
+            "icon": "Scan",
+            "num": "03",
+            "title": "The Machine Reads",
+            "body": "Generative AI reads every line — every entry, every number, every name.",
+            "scene": "Scene3Scan"
+          },
+          {
+            "icon": "Layout",
+            "num": "04",
+            "title": "Chaos to Clarity",
+            "body": "Handwriting becomes structured, queryable data — instantly.",
+            "scene": "Scene4Transform"
+          },
+          {
+            "icon": "TrendingUp",
+            "num": "05",
+            "title": "Data Becomes Decisions",
+            "body": "Every transaction becomes a data point. Every data point becomes a decision.",
+            "scene": "Scene5Dashboard"
+          },
+          {
+            "icon": "Heart",
+            "num": "06",
+            "title": "Dignity Restored",
+            "body": "Empowering rural businesses. Dignifying livelihoods. Shaping rural India.",
+            "scene": "Scene6Impact"
+          }
+        ]
+      },
       "pipeline": {
         "eyebrow": "How we work",
         "heading": "From raw data<br />→ insights<br />→ AI-driven decisions.",

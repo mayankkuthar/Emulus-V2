@@ -7,6 +7,13 @@ import { PageShell } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
 import { useBooking } from "@/lib/BookingContext";
 import { icon } from "@/lib/icons";
+import { GvSceneCard } from "@/components/GvSceneCard";
+import { Scene1Problem } from "@/components/scenes/Scene1Problem";
+import { Scene2Photograph } from "@/components/scenes/Scene2Photograph";
+import { Scene3Scan } from "@/components/scenes/Scene3Scan";
+import { Scene4Transform } from "@/components/scenes/Scene4Transform";
+import { Scene5Dashboard } from "@/components/scenes/Scene5Dashboard";
+import { Scene6Impact } from "@/components/scenes/Scene6Impact";
 import content from "@/content.json";
 
 const c = content.pages.home;
@@ -69,7 +76,7 @@ function MiniChart({ heights, variant }: { heights: number[]; variant: "dark" | 
 }
 
 /* ── Cap card with mouse-glow ── */
-function CapCard({ icon: IconName, title, body, href }: { icon: string; title: string; body: string; href: string }) {
+function CapCard({ icon: IconName, title, body, href, num }: { icon: string; title: string; body: string; href?: string; num?: string }) {
   const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", (e.clientX - r.left) + "px");
@@ -77,12 +84,13 @@ function CapCard({ icon: IconName, title, body, href }: { icon: string; title: s
   };
   return (
     <article className="cap" onMouseMove={onMouseMove}>
+      {num && <span className="cap-num">{num}</span>}
       <div className="cap-ico">
         {icon(IconName, { size: 22, strokeWidth: 1.8 })}
       </div>
       <h3>{title}</h3>
       <p>{body}</p>
-      <Link to={href} className="cap-link">Learn more →</Link>
+      {href && <Link to={href} className="cap-link">Learn more →</Link>}
     </article>
   );
 }
@@ -194,6 +202,36 @@ export default function Home() {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="block" id="gv-story">
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow"><span className="dot" /> {c.gvStory.eyebrow}</p>
+              <h2 dangerouslySetInnerHTML={{ __html: c.gvStory.heading.replace(c.gvStory.accentWord, `<em style="font-style:normal;color:#e54727">${c.gvStory.accentWord}</em>`) }} />
+            </div>
+            <p>{c.gvStory.description}</p>
+          </div>
+          <div className="gv-scenes">
+            {c.gvStory.items.map((scene: any) => {
+              const sceneMap: Record<string, React.ComponentType> = {
+                Scene1Problem,
+                Scene2Photograph,
+                Scene3Scan,
+                Scene4Transform,
+                Scene5Dashboard,
+                Scene6Impact,
+              };
+              const SceneComponent = sceneMap[scene.scene as string];
+              return (
+                <GvSceneCard key={scene.num} num={scene.num} title={scene.title} caption={scene.body}>
+                  {SceneComponent && <SceneComponent />}
+                </GvSceneCard>
+              );
+            })}
           </div>
         </div>
       </section>
