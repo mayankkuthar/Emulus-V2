@@ -130,54 +130,55 @@
       },
       "gvStory": {
         "eyebrow": "Case Study",
-        "heading": "Paper to Pixels:<br />The Six Senses of GV Story",
-        "accentWord": "Six Senses",
-        "description": "From the first stroke of ink in a village ledger to real-time intelligence powering rural India. A cinematic case study in six scenes.",
+        "heading": "From Paper Ledger</br> to AI-Powered Intelligence",
+        "accentWord": "AI-Powered Intelligence",
+        "description": "A full-stack digital transformation that replaced paper-based ledgers with AI-powered analytics across rural India — delivering measurable impact across six operational milestones.",
         "items": [
           {
             "icon": "BookOpen",
             "num": "01",
-            "title": "The Weight of Paper",
-            "body": "Millions of transactions. Recorded by hand. Invisible to the world.",
+            "title": "Paper-Based Operations",
+            "body": "Millions of transactions recorded by hand across thousands of remote village stores — with no central visibility, no audit trail, and no path to scale.",
             "scene": "Scene1Problem"
           },
           {
             "icon": "Camera",
             "num": "02",
-            "title": "One Photograph",
-            "body": "A single tap. The entire intervention — frictionless, familiar, powerful.",
+            "title": "Zero-Touch Capture",
+            "body": "A single photograph captures every ledger page. No hardware changes, no training overhead — just a smartphone and a purpose-built vision pipeline.",
             "scene": "Scene2Photograph"
           },
           {
             "icon": "Scan",
             "num": "03",
-            "title": "The Machine Reads",
-            "body": "Generative AI reads every line — every entry, every number, every name.",
+            "title": "Automated Extraction",
+            "body": "Generative AI classifies, extracts, and validates structured data from unstructured handwritten entries — at scale, with configurable accuracy thresholds.",
             "scene": "Scene3Scan"
           },
           {
             "icon": "Layout",
             "num": "04",
-            "title": "Chaos to Clarity",
-            "body": "Handwriting becomes structured, queryable data — instantly.",
+            "title": "Structured Intelligence",
+            "body": "Handwriting is normalized into a queryable data model — enabling real-time aggregation, duplicate resolution, and downstream integration.",
             "scene": "Scene4Transform"
           },
           {
             "icon": "TrendingUp",
             "num": "05",
-            "title": "Data Becomes Decisions",
-            "body": "Every transaction becomes a data point. Every data point becomes a decision.",
+            "title": "Actionable Analytics",
+            "body": "Dashboards and alerts surface transaction trends, inventory gaps, and regional patterns — turning raw data into operational intelligence.",
             "scene": "Scene5Dashboard"
           },
           {
             "icon": "Heart",
             "num": "06",
-            "title": "Dignity Restored",
-            "body": "Empowering rural businesses. Dignifying livelihoods. Shaping rural India.",
+            "title": "Economic Empowerment",
+            "body": "Self-employed shopkeepers gain access to credit, inventory planning, and market linkages — unlocking financial inclusion at the last mile.",
             "scene": "Scene6Impact"
           }
         ]
       },
+
       "pipeline": {
         "eyebrow": "How we work",
         "heading": "From raw data<br />→ insights<br />→ AI-driven decisions.",
