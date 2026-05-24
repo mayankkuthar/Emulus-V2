@@ -187,6 +187,11 @@ export default function Home() {
             </div>
             <p>{c.capabilities.description}</p>
           </div>
+          <div className="caps-labels">
+            <span>GEN-AI</span>
+            <span>Research &amp; Technology</span>
+            <span>Delivery</span>
+          </div>
           <div className="caps">
             {c.capabilities.items.map((cap: any, i: number) => (
               <CapCard

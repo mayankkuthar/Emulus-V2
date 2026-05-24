@@ -1137,8 +1137,9 @@
   grid-template-rows: repeat(3, auto);
   gap: 1px;
   background: var(--c-line);
-  border: 1px solid var(--c-line);
-  border-radius: 28px;
+  border: 0 solid var(--c-line);
+  border-width: 0 1px 1px;
+  border-radius: 0 0 28px 28px;
   overflow: hidden;
 }
 .cap:first-child {
@@ -1163,6 +1164,31 @@
 @media (max-width: 640px) {
   .caps {
     grid-template-columns: 1fr;
+  }
+}
+.caps-labels {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--c-line);
+  border: 1px solid var(--c-line);
+  border-bottom: none;
+  border-radius: 28px 28px 0 0;
+  overflow: hidden;
+}
+.caps-labels > span {
+  padding: 14px 30px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-ink-2);
+  background: var(--c-mist);
+}
+@media (max-width: 900px) {
+  .caps-labels {
+    display: none;
   }
 }
 .cap {
