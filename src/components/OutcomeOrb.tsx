@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NODES = [
   {
@@ -14,6 +15,14 @@ const NODES = [
   { id: "research", label: "Research", sub: "market · customer", angle: 198, icon: "◎" },
 ];
 
+const SECTION_MAP: Record<string, string> = {
+  genai: "genai",
+  research: "research",
+  tech: "data",
+  software: "software",
+  talent: "staff",
+};
+
 const R = 148,
   CX = 190,
   CY = 190;
@@ -23,8 +32,8 @@ const toXY = (a: number) => ({
 });
 
 export default function OutcomeOrb() {
+  const navigate = useNavigate();
   const [hov, setHov] = useState<string | null>(null);
-  const [act, setAct] = useState<string | null>(null);
   const [entered, setEntered] = useState(false);
   const [rot1, setRot1] = useState(0);
   const [rot2, setRot2] = useState(0);
@@ -45,8 +54,7 @@ export default function OutcomeOrb() {
     return () => cancelAnimationFrame(frame);
   }, []);
 
-  const cur = hov || act;
-  const activeNode = NODES.find((n) => n.id === cur);
+  const cur = hov;
 
   return (
     <div className="oo-orb">
@@ -159,7 +167,7 @@ export default function OutcomeOrb() {
               }}
               onMouseEnter={() => setHov(n.id)}
               onMouseLeave={() => setHov(null)}
-              onClick={() => setAct(act === n.id ? null : n.id)}
+              onClick={() => navigate(`/services#${SECTION_MAP[n.id]}`)}
             >
               <div className={`oo-card${isOn ? " on" : ""}`}>
                 <div className="oo-dot" />

@@ -13,10 +13,23 @@ import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    if (hash) {
+      const id = hash.replace("#", "");
+      const scrollToHash = (retries = 0) => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        } else if (retries < 10) {
+          setTimeout(() => scrollToHash(retries + 1), 100);
+        }
+      };
+      scrollToHash();
+      return;
+    }
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 }
 
