@@ -1134,15 +1134,30 @@
 .caps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, auto);
   gap: 1px;
   background: var(--c-line);
   border: 1px solid var(--c-line);
   border-radius: 28px;
   overflow: hidden;
 }
-@media (max-width: 1000px) {
+.cap:first-child {
+  grid-row: 1 / 4;
+  grid-column: 1;
+}
+.cap:last-child {
+  grid-row: 1 / 4;
+  grid-column: 3;
+}
+@media (max-width: 900px) {
   .caps {
     grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  .cap:first-child,
+  .cap:last-child {
+    grid-row: auto;
+    grid-column: auto;
   }
 }
 @media (max-width: 640px) {
@@ -1156,6 +1171,61 @@
   position: relative;
   overflow: hidden;
   transition: background 0.35s var(--ease-out);
+}
+.cap:first-child,
+.cap:last-child {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: visible;
+}
+.cap:first-child::after,
+.cap:last-child::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--c-orange), var(--c-orange-soft));
+  opacity: 0.5;
+}
+.cap:first-child .cap-ico,
+.cap:last-child .cap-ico {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+}
+.cap:first-child h3,
+.cap:last-child h3 {
+  font-size: 22px;
+  margin-top: 28px;
+}
+.cap-feats {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.cap-feats li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14px;
+  color: var(--c-ink-2);
+  line-height: 1.5;
+}
+.cap-feats li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--c-orange);
+  opacity: 0.6;
 }
 .cap::before {
   content: "";
@@ -1249,6 +1319,31 @@
   transform: translateY(0);
   color: var(--c-orange);
   gap: 10px;
+}
+
+.cap:first-child .cap-content,
+.cap:last-child .cap-content {
+  flex-shrink: 0;
+}
+
+.cap .cap-visual {
+  flex-shrink: 0;
+  width: 100%;
+  margin-top: auto;
+  padding-top: 20px;
+  line-height: 0;
+  border-radius: 12px;
+}
+
+.cap .cap-visual .cap-img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+
+.cap .cap-visual svg {
+  width: 100%;
+  display: block;
 }
 
 /* ---------- GV Story scene cards ---------- */

@@ -79,7 +79,7 @@
       ],
       "capabilities": {
         "eyebrow": "Capabilities",
-        "heading": "Six capabilities,<br />one outcome: clarity.",
+        "heading": "Five capabilities,<br />one outcome: clarity.",
         "accentWord": "clarity",
         "description": "We combine research rigor with engineering discipline and modern AI — a single team that goes from raw data to working product, end to end.",
         "items": [
@@ -87,7 +87,14 @@
             "icon": "Brain",
             "title": "Generative AI Consulting",
             "body": "Agentic workflows, RAG systems, and operationalized analytics built for production-grade reliability.",
-            "href": "/services"
+            "href": "/services",
+            "features": [
+              "LLM strategy & evaluation",
+              "RAG and agent systems",
+              "Productionizing GenAI workflows",
+              "Eval harnesses & guardrails",
+              "Custom model fine-tuning"
+            ]
           },
           {
             "icon": "Search",
@@ -111,13 +118,13 @@
             "icon": "Users",
             "title": "Staff Augmentation",
             "body": "Embed senior data scientists, ML engineers and analysts directly into your roadmap.",
-            "href": "/careers"
-          },
-          {
-            "icon": "Heart",
-            "title": "Social Enterprises & NGOs",
-            "body": "Impact measurement, MIS platforms, and analytics for purpose-led organizations and field teams.",
-            "href": "/services"
+            "href": "/careers",
+            "features": [
+              "Vetted senior talent",
+              "Flexible engagement models",
+              "Knowledge transfer built-in",
+              "Remote-first or on-site"
+            ]
           }
         ]
       },

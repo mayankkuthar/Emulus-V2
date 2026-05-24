@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { HeroBackdrop } from "@/components/HeroBackdrop";
 import OutcomeOrb from "@/components/OutcomeOrb";
@@ -15,6 +15,8 @@ import { Scene4Transform } from "@/components/scenes/Scene4Transform";
 import { Scene5Dashboard } from "@/components/scenes/Scene5Dashboard";
 import { Scene6Impact } from "@/components/scenes/Scene6Impact";
 import content from "@/content.json";
+import roboImg from "@/assets/robo.jpg";
+import staffAugImg from "@/assets/staff_aug.jpg";
 
 const c = content.pages.home;
 
@@ -76,7 +78,7 @@ function MiniChart({ heights, variant }: { heights: number[]; variant: "dark" | 
 }
 
 /* ── Cap card with mouse-glow ── */
-function CapCard({ icon: IconName, title, body, href, num }: { icon: string; title: string; body: string; href?: string; num?: string }) {
+function CapCard({ icon: IconName, title, body, href, num, features, visual }: { icon: string; title: string; body: string; href?: string; num?: string; features?: string[]; visual?: ReactNode }) {
   const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
     const r = e.currentTarget.getBoundingClientRect();
     e.currentTarget.style.setProperty("--mx", (e.clientX - r.left) + "px");
@@ -84,13 +86,23 @@ function CapCard({ icon: IconName, title, body, href, num }: { icon: string; tit
   };
   return (
     <article className="cap" onMouseMove={onMouseMove}>
-      {num && <span className="cap-num">{num}</span>}
-      <div className="cap-ico">
-        {icon(IconName, { size: 22, strokeWidth: 1.8 })}
+      <div className="cap-content">
+        {num && <span className="cap-num">{num}</span>}
+        <div className="cap-ico">
+          {icon(IconName, { size: 22, strokeWidth: 1.8 })}
+        </div>
+        <h3>{title}</h3>
+        <p>{body}</p>
+        {features && (
+          <ul className="cap-feats">
+            {features.map((f: string) => (
+              <li key={f}>{f}</li>
+            ))}
+          </ul>
+        )}
+        {href && <Link to={href} className="cap-link">Learn more →</Link>}
       </div>
-      <h3>{title}</h3>
-      <p>{body}</p>
-      {href && <Link to={href} className="cap-link">Learn more →</Link>}
+      {visual && <div className="cap-visual">{visual}</div>}
     </article>
   );
 }
@@ -176,7 +188,19 @@ export default function Home() {
             <p>{c.capabilities.description}</p>
           </div>
           <div className="caps">
-            {c.capabilities.items.map((cap: any) => <CapCard key={cap.title} {...cap} />)}
+            {c.capabilities.items.map((cap: any, i: number) => (
+              <CapCard
+                key={cap.title}
+                {...cap}
+                visual={
+                  i === 0
+                    ? <img src={roboImg} alt="" className="cap-img" />
+                    : i === 4
+                      ? <img src={staffAugImg} alt="" className="cap-img" />
+                      : undefined
+                }
+              />
+            ))}
           </div>
         </div>
       </section>
