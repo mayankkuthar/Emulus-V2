@@ -78,9 +78,9 @@ export function GvStorySection() {
   }, []);
 
   return (
-    <section className="block" id="gv-story">
+    <section className="block !pb-10 xl:!pb-[120px]" id="gv-story">
       <div className="wrap">
-        <div className="mx-auto grid max-w-[1560px] gap-8 xl:grid-cols-[minmax(0,1fr)_420px] xl:items-start">
+        <div className="mx-auto grid max-w-[1560px] gap-4 xl:gap-8 xl:grid-cols-[minmax(0,1fr)_420px] xl:items-start">
           <section className="flex min-h-[400px] lg:min-h-[780px] flex-col justify-between rounded-[2rem] border border-border/60 bg-gradient-to-br from-navy to-navy-soft p-5 shadow-2xl sm:p-7 lg:p-8">
             <div className="space-y-3">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-orange-soft">Case Study</p>
@@ -134,7 +134,7 @@ export function GvStorySection() {
             </div>
           </section>
 
-          <div className="flex items-start justify-center xl:justify-end pt-4">
+          <div className="flex items-start justify-center xl:justify-end pt-0 xl:pt-4">
             <PhoneEmulator />
           </div>
         </div>
@@ -149,7 +149,7 @@ export function GvStorySection() {
 
 function PhoneFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="flex justify-center xl:justify-end max-w-full py-2">
+    <div className="flex justify-center xl:justify-end max-w-full py-2 mb-[-351px] sm:mb-[-234px] lg:mb-[-117px] xl:mb-0">
       <div className="relative shrink-0 scale-[0.55] sm:scale-[0.7] lg:scale-[0.85] xl:scale-100 origin-top" style={{ width: 380, height: 780 }}>
         <div
           className="absolute inset-0 rounded-[3rem] bg-neutral-900 shadow-2xl"
@@ -172,7 +172,7 @@ function PhoneFrame({ children }: { children: ReactNode }) {
               <svg width="24" height="11" viewBox="0 0 24 11" fill="none"><rect x="0.5" y="0.5" width="20" height="10" rx="2.5" stroke="currentColor" opacity="0.5"/><rect x="2" y="2" width="17" height="7" rx="1.5" fill="currentColor"/><rect x="21" y="3.5" width="1.6" height="4" rx="0.6" fill="currentColor" opacity="0.5"/></svg>
             </div>
           </div>
-          <div className="flex-1 overflow-x-hidden overflow-y-auto">{children}</div>
+          <div className="flex-1 overflow-x-hidden">{children}</div>
         </div>
       </div>
     </div>
@@ -447,7 +447,7 @@ const activity = [
 
 function HomeScreen({ onNav }: { onNav: (s: Screen) => void }) {
   return (
-    <div className="flex-1 overflow-y-auto px-5 pt-3 pb-4">
+    <div className="flex-1 overflow-y-auto px-5 pt-3 pb-4 scrollbar-white">
       <div className="flex items-center gap-3 pt-2 pb-4">
         <img src={logo} alt="Gram Vikas" className="h-10 w-auto" />
         <div className="relative flex-1">
@@ -535,7 +535,7 @@ function UploadScreen({
   return (
     <>
       <PhoneHeader title="Daybook Upload" onBack={onBack} />
-      <div className="flex-1 overflow-y-auto px-5 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 pb-4 scrollbar-white">
         <div className="flex gap-2 mb-3">
           <input
             defaultValue={enterprise.id}
@@ -657,7 +657,7 @@ function ReviewScreen({
   return (
     <>
       <PhoneHeader title="Review" onBack={onBack} />
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 pb-4 scroll-smooth">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 pb-4 scroll-smooth scrollbar-white">
         <div className="rounded-xl overflow-hidden border border-border bg-card">
           <img src={daybookImg} alt="Uploaded daybook page" className="w-full h-auto object-contain" />
         </div>
@@ -741,7 +741,7 @@ function StatementsScreen({
   return (
     <>
       <PhoneHeader title="Financial Statements" onBack={onBack} />
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 pb-4 scroll-smooth">
+      <div ref={scrollRef} className="flex-1 overflow-y-auto px-5 pb-4 scroll-smooth scrollbar-white">
         <div className="flex items-center gap-4 border-b border-border mb-4 -mx-1 overflow-x-auto">
           {tabs.map((t) => (
             <button
@@ -896,7 +896,7 @@ function AlertsScreen({ onBack, onView }: { onBack: () => void; onView: () => vo
   return (
     <>
       <PhoneHeader title="Alerts" onBack={onBack} />
-      <div className="flex-1 overflow-y-auto px-5 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 pb-4 scrollbar-white">
         <ul className="space-y-3">
           {alertItems.map((a) => (
             <li key={a.id} className="rounded-xl border border-destructive/30 bg-destructive/5 p-3 flex gap-3">
@@ -929,7 +929,7 @@ function HistoryScreen({ onBack }: { onBack: () => void }) {
   return (
     <>
       <PhoneHeader title="History" onBack={onBack} />
-      <div className="flex-1 overflow-y-auto px-5 pb-4">
+      <div className="flex-1 overflow-y-auto px-5 pb-4 scrollbar-white">
         <ul className="space-y-2">
           {historyRecords.map((r) => (
             <li key={r.id} className="rounded-xl border border-border bg-card p-3 flex items-center justify-between">

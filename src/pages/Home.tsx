@@ -263,7 +263,7 @@ export default function Home() {
 
       <GvStorySection />
 
-      <section className="block" id="industries">
+      <section className="block !pt-10" id="industries">
         <div className="wrap">
           <div className="section-head">
             <div>

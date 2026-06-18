@@ -2703,6 +2703,22 @@
   opacity: 0.5;
 }
 
+/* Phone emulator scrollbar */
+.scrollbar-white {
+  scrollbar-width: thin;
+  scrollbar-color: #fff transparent;
+}
+.scrollbar-white::-webkit-scrollbar {
+  width: 5px;
+}
+.scrollbar-white::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-white::-webkit-scrollbar-thumb {
+  background-color: #fff;
+  border-radius: 3px;
+}
+
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   *,
