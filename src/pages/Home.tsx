@@ -7,13 +7,7 @@ import { PageShell } from "@/components/PageShell";
 import { useSEO } from "@/lib/useSEO";
 import { useBooking } from "@/lib/BookingContext";
 import { icon } from "@/lib/icons";
-import { GvSceneCard } from "@/components/GvSceneCard";
-import { Scene1Problem } from "@/components/scenes/Scene1Problem";
-import { Scene2Photograph } from "@/components/scenes/Scene2Photograph";
-import { Scene3Scan } from "@/components/scenes/Scene3Scan";
-import { Scene4Transform } from "@/components/scenes/Scene4Transform";
-import { Scene5Dashboard } from "@/components/scenes/Scene5Dashboard";
-import { Scene6Impact } from "@/components/scenes/Scene6Impact";
+import { GvStorySection } from "@/components/GvStorySection";
 import content from "@/content.json";
 import roboImg from "@/assets/robo.jpg";
 import staffAugImg from "@/assets/staff_aug.jpg";
@@ -235,6 +229,7 @@ export default function Home() {
         </div>
       </section>
 
+{/* -- Old GV Story case study section (replaced by GvStorySection) --
       <section className="block" id="gv-story">
         <div className="wrap">
           <div className="section-head">
@@ -264,6 +259,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+--*/}
+
+      <GvStorySection />
 
       <section className="block" id="industries">
         <div className="wrap">
