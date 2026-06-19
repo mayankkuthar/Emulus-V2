@@ -78,7 +78,7 @@ export function GvStorySection() {
   }, []);
 
   return (
-    <section className="block !pb-10 xl:!pb-[120px]" id="gv-story">
+    <section className="block !pb-10 xl:!pb-[40px]" id="gv-story">
       <div className="wrap">
           <div className="mx-auto grid max-w-[1560px] gap-4 xl:gap-8 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start">
           <section className="flex min-h-[343px] sm:min-h-[437px] lg:min-h-[530px] xl:min-h-[624px] flex-col justify-between rounded-[2rem] border border-border/60 bg-gradient-to-br from-navy to-navy-soft p-5 shadow-2xl sm:p-7 lg:p-8">
@@ -149,8 +149,8 @@ export function GvStorySection() {
 
 function PhoneFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="flex justify-center xl:justify-end max-w-full py-2 mb-[-281px] sm:mb-[-187px] lg:mb-[-94px] xl:mb-0">
-      <div className="relative shrink-0 scale-[0.44] sm:scale-[0.56] lg:scale-[0.68] xl:scale-[0.8] origin-top" style={{ width: 380, height: 780 }}>
+    <div className="relative flex justify-center xl:justify-end max-w-full py-2 h-[343px] sm:h-[437px] lg:h-[530px] xl:h-[624px]">
+      <div className="absolute top-0 shrink-0 scale-[0.44] sm:scale-[0.56] lg:scale-[0.68] xl:scale-[0.8] origin-top" style={{ width: 380, height: 780 }}>
         <div
           className="absolute inset-0 rounded-[3rem] bg-neutral-900 shadow-2xl"
           style={{
