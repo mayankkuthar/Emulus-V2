@@ -80,11 +80,11 @@ export function GvStorySection() {
   return (
     <section className="block !pb-10 xl:!pb-[120px]" id="gv-story">
       <div className="wrap">
-        <div className="mx-auto grid max-w-[1560px] gap-4 xl:gap-8 xl:grid-cols-[minmax(0,1fr)_420px] xl:items-start">
-          <section className="flex min-h-[400px] lg:min-h-[780px] flex-col justify-between rounded-[2rem] border border-border/60 bg-gradient-to-br from-navy to-navy-soft p-5 shadow-2xl sm:p-7 lg:p-8">
+          <div className="mx-auto grid max-w-[1560px] gap-4 xl:gap-8 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start">
+          <section className="flex min-h-[343px] sm:min-h-[437px] lg:min-h-[530px] xl:min-h-[624px] flex-col justify-between rounded-[2rem] border border-border/60 bg-gradient-to-br from-navy to-navy-soft p-5 shadow-2xl sm:p-7 lg:p-8">
             <div className="space-y-3">
               <p className="text-sm font-semibold uppercase tracking-[0.28em] text-orange-soft">Case Study</p>
-              <h1 className="max-w-3xl text-4xl font-bold leading-[0.95] text-white sm:text-5xl lg:text-6xl">
+              <h1 className="max-w-3xl text-3xl font-bold leading-[0.95] text-white sm:text-4xl lg:text-5xl">
                 From Paper Ledger
                 <br />
                 to AI-Powered Intelligence.
@@ -92,7 +92,7 @@ export function GvStorySection() {
             </div>
 
             <div className="mt-6 flex-1 overflow-hidden rounded-[1.5rem] border border-white/10 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
-              <div className="relative h-full min-h-[300px] sm:min-h-[400px] lg:min-h-[540px] bg-black">
+              <div className="relative h-full min-h-[240px] sm:min-h-[320px] lg:min-h-[432px] bg-black">
                 {caseStudySlides.map((slide, index) => (
                   <div
                     key={slide.title}
@@ -134,7 +134,7 @@ export function GvStorySection() {
             </div>
           </section>
 
-          <div className="flex items-start justify-center xl:justify-end pt-0 xl:pt-4">
+          <div className="flex items-start justify-center xl:justify-end pt-0 xl:pt-1">
             <PhoneEmulator />
           </div>
         </div>
@@ -149,8 +149,8 @@ export function GvStorySection() {
 
 function PhoneFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="flex justify-center xl:justify-end max-w-full py-2 mb-[-351px] sm:mb-[-234px] lg:mb-[-117px] xl:mb-0">
-      <div className="relative shrink-0 scale-[0.55] sm:scale-[0.7] lg:scale-[0.85] xl:scale-100 origin-top" style={{ width: 380, height: 780 }}>
+    <div className="flex justify-center xl:justify-end max-w-full py-2 mb-[-281px] sm:mb-[-187px] lg:mb-[-94px] xl:mb-0">
+      <div className="relative shrink-0 scale-[0.44] sm:scale-[0.56] lg:scale-[0.68] xl:scale-[0.8] origin-top" style={{ width: 380, height: 780 }}>
         <div
           className="absolute inset-0 rounded-[3rem] bg-neutral-900 shadow-2xl"
           style={{
