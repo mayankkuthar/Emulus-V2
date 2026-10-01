@@ -303,35 +303,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="block" id="work" style={{ paddingTop: 0 }}>
-        <div className="wrap">
-          <div className="section-head">
-            <div>
-              <p className="eyebrow"><span className="dot" /> {c.work.eyebrow}</p>
-              <h2>{c.work.heading}</h2>
-            </div>
-            <p>{c.work.description}</p>
-          </div>
-          <div className="cases">
-            {c.work.items.map((item: any) => (
-              <article key={item.title} className="case">
-                <div className={`case-cover ${item.cover}`}>
-                  <div className="case-meta">
-                    <span>{item.tag}</span>
-                    <span>{item.stat} {item.statLabel}</span>
-                  </div>
-                </div>
-                <div className="case-body">
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                  <Link to="/case-studies" className="case-read">Read case study →</Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="block" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <div className="testimonial">

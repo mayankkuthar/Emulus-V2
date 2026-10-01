@@ -7,8 +7,6 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
 import Industries from "@/pages/Industries";
-import CaseStudies from "@/pages/CaseStudies";
-import Careers from "@/pages/Careers";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
 
@@ -58,8 +56,6 @@ export default function App() {
           <Route path="/about" element={<PageWrap><About /></PageWrap>} />
           <Route path="/services" element={<PageWrap><Services /></PageWrap>} />
           <Route path="/industries" element={<PageWrap><Industries /></PageWrap>} />
-          <Route path="/case-studies" element={<PageWrap><CaseStudies /></PageWrap>} />
-          <Route path="/careers" element={<PageWrap><Careers /></PageWrap>} />
           <Route path="/contact" element={<PageWrap><Contact /></PageWrap>} />
           <Route path="*" element={<PageWrap><NotFound /></PageWrap>} />
         </Routes>

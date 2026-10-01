@@ -10,8 +10,6 @@
       { "to": "/about", "label": "About" },
       { "to": "/services", "label": "Services" },
       { "to": "/industries", "label": "Industries" },
-      { "to": "/case-studies", "label": "Case Studies" },
-      { "to": "/careers", "label": "Careers" },
       { "to": "/contact", "label": "Contact" }
     ],
     "cta": "Book a call",
@@ -23,16 +21,13 @@
     "exploreLinks": [
       { "to": "/about", "label": "About" },
       { "to": "/services", "label": "Services" },
-      { "to": "/case-studies", "label": "Case studies" },
-      { "to": "/industries", "label": "Industries" },
-      { "to": "/careers", "label": "Careers" }
+      { "to": "/industries", "label": "Industries" }
     ],
     "presenceHeading": "Global presence",
     "presenceList": ["India · HQ", "Canada", "Australia", "Singapore"],
     "contactHeading": "Get in touch",
     "contactLinks": [
       { "to": "/contact", "label": "contact@emulus.co" },
-      { "to": "/careers", "label": "Careers" },
       { "label": "Partnerships" },
       { "label": "Press" }
     ],
@@ -52,8 +47,8 @@
         "subtitle": "Emulus is a global consulting partner for market research, data engineering, software, and Generative AI — helping enterprises and social-impact teams ship outcomes, not just dashboards.",
         "ctaPrimary": "Book a discovery call",
         "ctaPrimaryLink": "/contact",
-        "ctaSecondary": "See case studies",
-        "ctaSecondaryLink": "/case-studies",
+        "ctaSecondary": "See our services",
+        "ctaSecondaryLink": "/services",
         "trust": {
           "avatars": ["RD", "EM", "FA", "SR"],
           "text": "Trusted by teams in 4 countries across pharma, BFSI &amp; impact."
@@ -118,7 +113,7 @@
             "icon": "Users",
             "title": "Staff Augmentation",
             "body": "Embed senior data scientists, ML engineers and analysts directly into your roadmap.",
-            "href": "/careers",
+            "href": "/services",
             "features": [
               "Vetted senior talent",
               "Flexible engagement models",
